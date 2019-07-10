@@ -16,4 +16,4 @@ class RegistrationView(FormView):
         user = authenticate(username=username, password=form.cleaned_data['password1'])
         login(self.request, user)
         messages.success(self.request, f'Account created for {username}!')
-        return redirect('index')
+        return redirect('home')

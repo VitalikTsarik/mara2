@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models.content.tv_show import TvShow
+from .models.subscription import Subscription
+
+admin.site.register(Subscription)
+admin.site.register(TvShow)
