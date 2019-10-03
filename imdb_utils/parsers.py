@@ -1,9 +1,9 @@
-from imdb import Movie as ImdbMovie
+from imdb import Movie
 
 from subscriptions.models import Watchable, TvShow
 
 
-def _imdb_movie_to_watchable(imdb_movie: ImdbMovie) -> Watchable:
+def _imdb_movie_to_watchable(imdb_movie: Movie):
     watchable = Watchable(imdb_id=imdb_movie['title'])
     watchable.runtime = imdb_movie['runtimes'][0]
     watchable.genres = ', '.join(imdb_movie['genres'])
@@ -13,7 +13,7 @@ def _imdb_movie_to_watchable(imdb_movie: ImdbMovie) -> Watchable:
     return watchable
 
 
-def imdb_movie_to_tv_show(imdb_movie: ImdbMovie):
+def imdb_movie_to_tv_show(imdb_movie: Movie):
     tv_show = _imdb_movie_to_watchable(imdb_movie)
     tv_show.__class__ = TvShow
 
