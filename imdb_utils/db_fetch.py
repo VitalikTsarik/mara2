@@ -1,11 +1,17 @@
 from imdb import IMDb
-from .parsers import imdb_movie_to_tv_show
+
+from imdb_utils.parsers import search_result, imdb_movie_to_tv_show
 
 
-# todo: implement factory ImdbFactory (?)
-def get_tv_show_by_imdb_id(imdb_id):
-    return imdb_movie_to_tv_show(IMDb().get_movie(imdb_id))
+class ImdbConnection:
+    def __init__(self):
+        self.__connection = None
 
+    def connect(self):
+        self.__connection = IMDb()
 
-def get_tv_show_by_title(title):
-    pass
+    def fetch_tv_show_by_id(self, imdb_id):
+        return imdb_movie_to_tv_show(self.__connection.get_movie(imdb_id))
+
+    def search_by_title(self, title):
+        return search_result(self.__connection.search_movie(title))

@@ -1,6 +1,6 @@
 from django.db import models
 
-from subscriptions.models.content.subscribable import Subscribable
+from ..subscribable import Subscribable
 
 
 class Watchable(Subscribable):
