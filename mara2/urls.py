@@ -6,7 +6,7 @@ from mara2.views import HomeView
 from users import views as user_views
 
 urlpatterns = [
-    # path('', include('frontend.urls')),
+    path('', include('frontend.urls')),
     path('', include('subscriptions.urls')),
     # path('admin/', admin.site.urls),
     # path('api/home/', HomeView.as_view(), name='home'),
