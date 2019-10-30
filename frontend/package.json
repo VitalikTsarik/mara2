@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development --watch ./src/index.js --output ./static/frontend/main.js",
-    "build": "webpack --mode production ./src/index.js --output ./static/frontend/main.js"
+    "dev": "webpack --mode development --watch --config webpack.config.js",
+    "build": "webpack --mode production --config webpack.config.js"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +24,7 @@
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "style-loader": "^1.0.0",
+    "url-loader": "^2.2.0",
     "weak-key": "^1.0.1",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9"

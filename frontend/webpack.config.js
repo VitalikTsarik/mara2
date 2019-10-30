@@ -1,6 +1,13 @@
+const path = require('path');
+
 const DEBUG = true;
 
 module.exports = {
+    entry: './src/index.js',
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, 'static/frontend/'),
+    },
     module: {
         rules: [
             {
@@ -20,7 +27,7 @@ module.exports = {
                         loader: 'css-loader',
                         options: {
                             modules: {
-                                localIdentName: DEBUG ? '[name]__[local]' : '[hash:base64:5]',
+                                localIdentName: DEBUG ? '[local]' : '[hash:base64:5]',
                             },
                             sourceMap: DEBUG,
                         },
@@ -29,6 +36,16 @@ module.exports = {
                         loader: 'less-loader',
                     },
                 ],
+            },
+
+            {
+                test: /\.(jpe?g|png|svg)$/,
+                use: [
+                    {
+                        loader: 'url-loader',
+                    },
+                ]
+                ,
             },
         ],
     },
