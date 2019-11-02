@@ -1,0 +1,17 @@
+@import 'variables';
+
+.container {
+    @media screen and (min-width: $break-point-bg) {
+        padding: 30px 30%;
+    }
+
+    @media screen and (min-width: $break-point-md) and (max-width: $break-point-bg) {
+        padding: 10px 20%;
+    }
+    @media screen and (min-width: $break-point-sm) and (max-width: $break-point-md) {
+        padding: 10px 10%;
+    }
+    @media screen and (max-width: $break-point-sm) {
+        padding: 5px 2%;
+    }
+}

@@ -2,14 +2,14 @@ import React from 'react';
 import classNames from 'classnames';
 
 import styles from './Header.scss';
-import grid from '../../styles/grid.scss';
+import layout from '../../styles/layout.scss';
 
 import Logo from './logo.png';
 import SearchBar from './SearchBar/SearchBar';
 
 const Header = () => {
     return (
-        <nav className={classNames(styles.header, grid.container)}>
+        <nav className={classNames(styles.header, layout.container)}>
             {/*<img className={styles.header_logo} src='/static/logo.png'/>*/}
             <img className={styles.header_logo} src={Logo} alt='logo' />
             <ul className={styles.header_navBar}>
