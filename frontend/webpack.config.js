@@ -11,14 +11,14 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                test: /\.jsx?$/,
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
                 },
             },
             {
-                test: /\.less$/,
+                test: /\.scss$/,
                 use: [
                     {
                         loader: 'style-loader',
@@ -33,7 +33,7 @@ module.exports = {
                         },
                     },
                     {
-                        loader: 'less-loader',
+                        loader: 'sass-loader',
                     },
                 ],
             },

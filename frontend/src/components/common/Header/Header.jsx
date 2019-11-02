@@ -1,16 +1,20 @@
 import React from 'react';
+import classNames from 'classnames'
 
-import styles from './Header.less';
+import Logo from './logo.png'
+
+import styles from './Header.scss';
 
 const Header = () => {
     return (
-        <div className={styles.base}>
-            <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
+        <nav className={styles.header}>
+            {/*<img className={styles.header_logo} src='/static/logo.png'/>*/}
+            <img className={styles.header_logo} src={Logo}/>
+            <ul className={styles.header_navBar}>
+                <li className={styles.header_item}>Home</li>
+                <li className={styles.header_item}>List</li>
             </ul>
-        </div>
+        </nav>
     );
 };
 
