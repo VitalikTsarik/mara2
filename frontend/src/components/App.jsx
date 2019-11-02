@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Header from './common/Header/Header';
+import Header from './Header/Header';
 
 const App = () => {
     return (
