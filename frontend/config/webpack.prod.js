@@ -1,13 +1,8 @@
-const path = require('path');
+const merge = require('webpack-merge');
+const common = require('./webpack.common');
 
-const DEBUG = true;
-
-module.exports = {
-    entry: './src/index.js',
-    output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'static/frontend/'),
-    },
+module.exports = merge(common, {
+    mode: 'production',
     module: {
         rules: [
             {
@@ -27,9 +22,8 @@ module.exports = {
                         loader: 'css-loader',
                         options: {
                             modules: {
-                                localIdentName: DEBUG ? '[local]' : '[hash:base64:5]',
+                                localIdentName: '[hash:base64:5]',
                             },
-                            sourceMap: DEBUG,
                         },
                     },
                     {
@@ -49,7 +43,4 @@ module.exports = {
             },
         ],
     },
-    resolve: {
-        extensions: ['*', '.js', '.jsx'],
-    },
-};
+});

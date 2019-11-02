@@ -1,15 +1,13 @@
 {
-  "name": "frontend",
-  "version": "1.0.0",
-  "description": "",
+  "name": "mara2-frontend",
+  "license": "MIT",
+  "repository": "https://github.com/VitalikTsarik/mara2",
+  "author": "https://github.com/VitalikTsarik",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development --watch --config webpack.config.js",
-    "build": "webpack --mode production --config webpack.config.js"
+    "dev": "webpack --config config/webpack.dev.js",
+    "build": "webpack --config config/webpack.prod.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "react": "^16.11.0",
     "react-dom": "^16.11.0"
@@ -21,6 +19,7 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "classnames": "^2.2.6",
+    "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.2.0",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
@@ -31,6 +30,7 @@
     "url-loader": "^2.2.0",
     "weak-key": "^1.0.1",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.9"
+    "webpack-cli": "^3.3.9",
+    "webpack-merge": "^4.2.2"
   }
 }
