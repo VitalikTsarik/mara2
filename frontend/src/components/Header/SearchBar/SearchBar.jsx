@@ -1,23 +1,46 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import styles from './SearchBar.scss';
 
 import Lens from './lens.png';
-import useIsExtended from './hooks';
+import useClickOutside from '../../common/hooks';
 
 const SearchBar = ({onSubmit}) => {
-    const searchBar = useRef(null);
-    const input = useRef(null);
+    const searchBarRef = useRef(null);
+    const inputRef = useRef(null);
 
-    const isExtended = useIsExtended(searchBar, input);
+    const [isExtended, setIsExtended] = useState(false);
+
+    const handleClickInside = useCallback(() => {
+        if (searchBarRef.current && inputRef.current) {
+            setTimeout(() => {
+                setIsExtended(true);
+                inputRef.current.focus();
+            });
+        }
+    }, [searchBarRef, inputRef, setIsExtended]);
+
+    const handleClickOutside = useCallback((event) => {
+        if (searchBarRef.current && inputRef.current && !searchBarRef.current.contains(event.target)) {
+            setIsExtended(false);
+            inputRef.current.blur();
+        }
+    }, [searchBarRef, inputRef]);
+
+    useEffect(() => {
+        searchBarRef.current.addEventListener('click', handleClickInside);
+        return () => searchBarRef.current.removeEventListener('click', handleClickInside);
+    });
+
+    useClickOutside(searchBarRef, handleClickOutside);
 
     const onLensClick = useCallback(() => {
         if (isExtended) {
-            onSubmit(input.current.value);
+            onSubmit(inputRef.current.value);
         }
-    }, [isExtended]);
+    }, [isExtended, inputRef]);
 
     return (
         <div className={styles.searchBar} ref={searchBar}>
@@ -26,7 +49,7 @@ const SearchBar = ({onSubmit}) => {
                     styles.input,
                     isExtended && styles.input__extended,
                 )}
-                ref={input}
+                ref={inputRef}
                 type='text'
                 name='search_input'
                 placeholder='Search...'
