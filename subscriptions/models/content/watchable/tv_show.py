@@ -15,7 +15,9 @@ class ImdbManager(PolymorphicManager):
             connection.connect()
 
             tv_show = connection.fetch_tv_show_by_id(imdb_id)
-            tv_show.save()
+
+            if tv_show:
+                tv_show.save()
             return tv_show
 
 
@@ -26,4 +28,5 @@ class TvShow(Watchable):
     is_airing = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{super().__str__()} {self.seasons}'
+        return f'Tv Show {self.title} {self.imdb_id} {self.content_id}'
+

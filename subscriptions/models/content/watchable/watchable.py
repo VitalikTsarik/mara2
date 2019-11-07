@@ -13,3 +13,6 @@ class Watchable(Subscribable):
 
     def __str__(self):
         return f'{self.imdb_id} {self.title}'
+
+    class Meta:
+        abstract = True
