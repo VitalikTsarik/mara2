@@ -5,10 +5,11 @@ from .views.my_list import MyListView
 from .views.subscribe import subscribe
 from .views.tv_show_detail import TvShowDetailView
 
-from .api import TvShowViewSet
+from .api import TvShowViewSet, SubscriptionsViewSet
 
 router = DefaultRouter()
-router.register('api/subscriptions', TvShowViewSet)
+router.register('api/tv_show', TvShowViewSet)
+router.register('api/subscriptions', SubscriptionsViewSet)
 
 urlpatterns = router.urls
 
