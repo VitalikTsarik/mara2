@@ -14,7 +14,7 @@ class SubscriptionsViewSet(ModelViewSet):
     serializer_class = SubscriptionsSerializer
 
     def get_queryset(self):
-        return self.queryset.filter(user=self.request.user)
+        return self.queryset.filter(user=self.request.user).order_by('-subscription_date')
 
     def list(self, request, *args, **kwargs):
         subscriptions = self.filter_queryset(self.get_queryset())
