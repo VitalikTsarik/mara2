@@ -25,7 +25,7 @@ class TvShowPreviewSerializer(ModelSerializer):
         fields = (
             'content_id',
             'title',
-            'poster_url',
+            'preview_poster_url',
             'is_airing',
         )
 

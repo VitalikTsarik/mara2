@@ -9,6 +9,7 @@ class Watchable(Subscribable):
     runtime = models.DurationField()
     genres = models.CharField(max_length=50, default=None)
     year = models.CharField(max_length=4, default=None)
+    preview_poster_url = models.URLField(default='#')
     poster_url = models.URLField(default='#')
 
     def __str__(self):
