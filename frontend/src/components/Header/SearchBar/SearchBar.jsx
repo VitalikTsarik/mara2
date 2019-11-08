@@ -43,7 +43,13 @@ const SearchBar = ({onSubmit}) => {
     }, [isExtended, inputRef]);
 
     return (
-        <div className={styles.searchBar} ref={searchBar}>
+        <div
+            className={classNames(
+                styles.searchBar,
+                isExtended && styles.searchBar__extended
+            )}
+            ref={searchBarRef}
+        >
             <input
                 className={classNames(
                     styles.input,
@@ -54,7 +60,15 @@ const SearchBar = ({onSubmit}) => {
                 name='search_input'
                 placeholder='Search...'
             />
-            <img className={styles.icon} src={Lens} alt='lens' onClick={onLensClick} />
+            <img
+                className={classNames(
+                    styles.icon,
+                    isExtended && styles.icon__extended
+                )}
+                src={Lens}
+                alt='lens'
+                onClick={onLensClick}
+            />
         </div>
     );
 };

@@ -8,4 +8,8 @@ const getTvShowUrl = (contenId) => {
     return RouterUrls.TV_SHOW.replace(':contentId', contenId);
 };
 
-export { RouterUrls, getTvShowUrl };
+const getHomeUrl = () => {
+    return RouterUrls.HOME[0];
+};
+
+export { RouterUrls, getTvShowUrl, getHomeUrl };
