@@ -2,12 +2,12 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from subscriptions.models import TvShow
-from subscriptions.serializers import TvShowSerializer
+from subscriptions.serializers import TvShowDetailSerializer
 
 
 class TvShowViewSet(ReadOnlyModelViewSet):
     queryset = TvShow.objects.all()
-    serializer_class = TvShowSerializer
+    serializer_class = TvShowDetailSerializer
     lookup_url_kwarg = 'imdb_id'
 
     def retrieve(self, request, imdb_id=None, *args, **kwargs):

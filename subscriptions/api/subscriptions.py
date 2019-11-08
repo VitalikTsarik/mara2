@@ -3,7 +3,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 
 from subscriptions.models import Subscription, TvShow
-from subscriptions.serializers import SubscriptionsSerializer, TvShowSerializer
+from subscriptions.serializers import SubscriptionsSerializer, TvShowPreviewSerializer
 
 
 class SubscriptionsViewSet(ModelViewSet):
@@ -23,5 +23,5 @@ class SubscriptionsViewSet(ModelViewSet):
         for sub in subscriptions:
             tv_shows.append(TvShow.objects.get(imdb_id=sub.content.imdb_id))
 
-        serializer = TvShowSerializer(tv_shows, many=True)
+        serializer = TvShowPreviewSerializer(tv_shows, many=True)
         return Response(serializer.data)
