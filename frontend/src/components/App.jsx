@@ -6,8 +6,9 @@ import layout from '../styles/layout.scss';
 import Header from './Header/Header';
 import { DataProvider } from './common/DataProvider/DataProvider';
 import Item from './subscriptions/Item/Item';
-import SubButton from './common/SubButton/SubButton';
-import { ApiUrls } from './common/DataProvider/urls';
+import { ApiUrls, getTvShowApiUrl } from './common/DataProvider/urls';
+import { RouterUrls } from './common/urls';
+import TvShow from './TvShow/TvShow';
 
 const Subscriptions = ({data}) => {
     return data.map(sub => (
@@ -21,22 +22,29 @@ const App = () => {
             <>
                 <Header />
                 <div className={layout.container}>
-                    <Route exact path='/1'>
-                        <DataProvider
-                            url={ApiUrls.SUBSCRIPTIONS}
-                            render={data => <Subscriptions data={data} />}
+                    <Switch>
+                        <Route path={RouterUrls.SUBSCRIPTIONS}>
+                            <DataProvider
+                                url={ApiUrls.SUBSCRIPTIONS}
+                                render={data => <Subscriptions data={data} />}
+                            />
+                        </Route>
+                        <Route exact path={RouterUrls.HOME}>
+                            <Item item={{
+                                title: 'Better Call Soul',
+                                posterUrl: 'https://m.media-amazon.com/images/M/MV5BMTAxOTQ0MjUzMzJeQTJeQWpwZ15BbWU4MDY0NTAxNzMx._V1_SY1000_CR0,0,674,1000_AL_.jpg'
+                            }} />
+                        </Route>
+                        <Route
+                            path={RouterUrls.TV_SHOW}
+                            render={({match}) => (
+                                <DataProvider
+                                    url={getTvShowApiUrl(match.params.contentId)}
+                                    render={data => <TvShow data={data} />}
+                                />
+                            )}
                         />
-                    </Route>
-                    <Route exact path='/2'>
-                        <Item item={{
-                            title: 'Better Call Soul',
-                            posterUrl: 'https://m.media-amazon.com/images/M/MV5BMTAxOTQ0MjUzMzJeQTJeQWpwZ15BbWU4MDY0NTAxNzMx._V1_SY1000_CR0,0,674,1000_AL_.jpg'
-                        }} />
-                    </Route>
-                    <Route exact path='/3'>
-                        <SubButton onClick={() => {
-                        }} />
-                    </Route>
+                    </Switch>
                 </div>
             </>
         </Router>

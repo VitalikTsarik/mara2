@@ -4,12 +4,12 @@ const ApiUrls = Object.freeze({
     TV_SHOW_IMDB: '/api/tv_show/imdb/',
 });
 
-const getTvShowUrl = (contenId) => {
+const getTvShowApiUrl = (contenId) => {
     return ApiUrls.TV_SHOW.concat(contenId);
 };
 
-const getTvShowUrlByImdbId = (imdbId) => {
+const getTvShowApiUrlByImdbId = (imdbId) => {
     return ApiUrls.TV_SHOW_IMDB.concat(imdbId);
 };
 
-export { ApiUrls, getTvShowUrl, getTvShowUrlByImdbId };
+export { ApiUrls, getTvShowApiUrl, getTvShowApiUrlByImdbId };

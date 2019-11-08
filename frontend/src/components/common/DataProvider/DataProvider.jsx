@@ -15,6 +15,7 @@ const useData = (url) => {
             }
         }).then(data => {
             setData(data);
+            setError(null);
             setIsLoading(false);
         }).catch(error => {
             setError(error);
