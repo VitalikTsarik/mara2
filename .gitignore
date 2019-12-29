@@ -22,3 +22,4 @@ venv/
 # node
 node_modules/
 frontend/static/frontend/
+/static/

@@ -6,7 +6,7 @@ import layout from '../styles/layout.scss';
 import Header from './Header/Header';
 import { DataProvider } from './common/DataProvider/DataProvider';
 import Item from './subscriptions/Item/Item';
-import { ApiUrls, getTvShowApiUrl } from './common/DataProvider/urls';
+import { ApiUrls, getTvShowApiUrl, getTvShowApiUrlByImdbId } from './common/DataProvider/urls';
 import { RouterUrls } from './common/urls';
 import TvShow from './TvShow/TvShow';
 
@@ -26,6 +26,7 @@ const App = () => {
                         <Route path={RouterUrls.SUBSCRIPTIONS}>
                             <DataProvider
                                 url={ApiUrls.SUBSCRIPTIONS}
+                                key={RouterUrls.SUBSCRIPTIONS}
                                 render={data => <Subscriptions data={data} />}
                             />
                         </Route>
@@ -37,12 +38,16 @@ const App = () => {
                         </Route>
                         <Route
                             path={RouterUrls.TV_SHOW}
-                            render={({match}) => (
-                                <DataProvider
-                                    url={getTvShowApiUrl(match.params.contentId)}
-                                    render={data => <TvShow data={data} />}
-                                />
-                            )}
+                            render={({match}) => {
+                                const contentId = getTvShowApiUrlByImdbId(match.params.contentId);
+                                return (
+                                    <DataProvider
+                                        key={contentId}
+                                        url={contentId}
+                                        render={data => <TvShow data={data} />}
+                                    />
+                                );
+                            }}
                         />
                     </Switch>
                 </div>

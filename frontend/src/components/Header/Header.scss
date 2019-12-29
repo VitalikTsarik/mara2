@@ -1,14 +1,16 @@
 @import '../../styles/variables';
+@import '../../styles/colors';
 
 .header {
     display: flex;
     align-items: center;
     height: 70px;
-    background-color: $dark;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)), #121212;
 
     &_logo {
         width: 60px;
         height: 60px;
+        mix-blend-mode: screen;
     }
 
     &_navBar {
@@ -22,20 +24,20 @@
         padding: 10px;
         cursor: pointer;
         text-decoration: none;
-        color: $light;
+        color: $text;
 
         &:hover {
             border-radius: 1.5em;
-            background-color: rgba($light, 0.1);
+            background-color: rgba(rgba($primary, 0.08), 0.1);
         }
 
         &__active {
-            color: $dark;
+            color: $primary;
             border-radius: 1.5em;
-            background-color: $light;
+            background-color: rgba($primary, 0.08);
 
             &:hover {
-                background-color: $light;
+                background-color: rgba($primary, 0.08);
             }
         }
     }

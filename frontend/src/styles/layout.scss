@@ -1,4 +1,19 @@
 @import 'variables';
+@import 'colors';
+
+body {
+    background-color: $background;
+    color: $text;
+}
+
+input {
+    color: $text;
+    caret-color: $text;
+}
+
+.a {
+    color: $text;
+}
 
 .container {
     @media screen and (min-width: $break-point-bg) {
