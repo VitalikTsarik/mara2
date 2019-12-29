@@ -42,6 +42,12 @@ const SearchBar = ({onSubmit}) => {
         }
     }, [isExtended, inputRef]);
 
+    const handleKeyPress = useCallback((event) => {
+        if (event.key === 'Enter') {
+            onSubmit(inputRef.current.value);
+        }
+    });
+
     return (
         <div
             className={classNames(
@@ -59,6 +65,7 @@ const SearchBar = ({onSubmit}) => {
                 type='text'
                 name='search_input'
                 placeholder='Search...'
+                onKeyDown={handleKeyPress}
             />
             <img
                 className={classNames(
