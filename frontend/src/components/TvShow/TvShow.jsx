@@ -1,44 +1,65 @@
-import React, { useState, useCallback } from 'react';
-import PropTypes from 'prop-types';
+import React, { useCallback } from 'react';
+import classNames from 'classnames';
 
 import styles from './TvShow.scss';
+
 import SubButton from '../common/SubButton/SubButton';
-
-let a = {
-    content_id: 2,
-    title: 'Better Call Saul',
-    poster_url: 'https://m.media-amazon.com/images/M/MV5BMTAxOTQ0MjUzMzJeQTJeQWpwZ15BbWU4MDY0NTAxNzMx._V1_SY150_CR0,0,101,150_.jpg',
-    'seasons': 5,
-    'runtime': '00:46:00',
-    'genres': 'Crime, Drama',
-    'year': '2015',
-    'years': '2015-',
-    'is_airing': false
-};
-
+import Tooltip from '../common/Tooltip/Tooltip';
 
 const TvShow = ({
-                    data: {
-                        contentId,
-                        title,
-                        posterUrl,
-                        seasons,
-                        runtime,
-                        genres,
-                        year,
-                        years,
-                        isAiring
-                    }
+                    data:
+                        {
+                            title,
+                            poster_url,
+                            seasons,
+                            runtime,
+                            genres,
+                            year,
+                            years,
+                            isAiring,
+                            isSubscribed,
+                        }
                 }) => {
+
+    const handleSubBtnClick = useCallback(() => {
+
+    });
+
     return (
-        <div>
-            <p>{title}</p>
+        <div className={styles.tvShow}>
+            <img className={styles.poster} src={poster_url} alt='poster' />
+            <div className={styles.overview}>
+                <div className={styles.title}>
+                    {title} ({year})
+                    <Tooltip
+                        content={'Airing Status'}
+                    >
+                        <div className={classNames(
+                            styles.circle,
+                            isAiring && styles.circle__active,
+                        )}
+                        />
+                    </Tooltip>
+                </div>
+                <div className={styles.info}>
+                    <div className={styles.infoName}>seasons</div>
+                    <div className={styles.infoContent}>{seasons}</div>
+                    <div className={styles.infoName}>runtime</div>
+                    <div className={styles.infoContent}>{runtime}</div>
+                    <div className={styles.infoName}>genres</div>
+                    <div className={styles.infoContent}>{genres}</div>
+                    <div className={styles.infoName}>years</div>
+                    <div className={styles.infoContent}>{years}</div>
+                </div>
+                <div className={styles.subBtn}>
+                    <SubButton
+                        onClick={handleSubBtnClick}
+                        isSub={isSubscribed}
+                    />
+                </div>
+            </div>
         </div>
     );
-};
-
-TvShow.propTypes = {
-    data: PropTypes.object.isRequired,
 };
 
 export default TvShow;

@@ -1,0 +1,76 @@
+@import '../../styles/variables';
+
+.tvShow {
+    display: flex;
+    margin-top: 30px;
+
+    @media (max-width: $break-point-sm) {
+        align-items: center;
+        flex-direction: column;
+    }
+}
+
+.poster {
+    width: 400px;
+    border-radius: 10px;
+
+    @media (max-width: $break-point-sm) {
+        width: 300px;
+    }
+}
+
+.overview {
+    margin-top: 0;
+    margin-left: 30px;
+
+    @media (max-width: $break-point-sm) {
+        margin-top: 30px;
+        margin-left: 15px;
+    }
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    color: #bb86fc;
+}
+
+.circle {
+    width: 10px;
+    height: 10px;
+    margin-left: 10px;
+    border-radius: 50%;
+    background: #cf6679;
+
+    &__active {
+        background: #00c300;
+    }
+}
+
+.info {
+    display: grid;
+    margin-top: 20px;
+    grid-template-columns: 80px 1fr;
+    grid-row-gap: 15px;
+    grid-column-gap: 15px;
+}
+
+.infoName {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #03dac5;
+    justify-self: end;
+}
+
+.infoContent {
+    font-size: 1rem;
+    align-self: center;
+}
+
+.subBtn {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}

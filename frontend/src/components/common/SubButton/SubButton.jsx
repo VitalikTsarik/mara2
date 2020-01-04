@@ -26,7 +26,7 @@ const SubButton = ({onClick, isSub}) => {
             )}
             onClick={handleClick}
         >
-            {isSub ? 'Subscribe' : 'Unsubscribe'}
+            {isSub ? 'Unsubscribe' : 'Subscribe'}
         </div>
     );
 };
