@@ -2,6 +2,7 @@ const ApiUrls = Object.freeze({
     SUBSCRIPTIONS: '/api/subscriptions/',
     TV_SHOW: '/api/tv_show/',
     TV_SHOW_IMDB: '/api/tv_show/imdb/',
+    SUBSCRIBE: '/api/subscribe/',
 });
 
 const getTvShowApiUrl = (contenId) => {

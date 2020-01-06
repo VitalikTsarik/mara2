@@ -11,10 +11,16 @@ const SubButton = ({onClick, isSub}) => {
 
     const handleClick = useCallback(() => {
         setIsLoading(true);
-        setTimeout(() => setIsLoading(false), 6000);
-        onClick();
-        setIsSuccess(true);
-        setIsLoaded(true);
+        onClick().then(() => {
+                setIsSuccess(true);
+            })
+            .catch(() => {
+                setIsSuccess(false);
+            })
+            .finally(() => {
+                setIsLoaded(true);
+                setTimeout(() => setIsLoaded(false));
+            });
     }, [isLoaded]);
 
     return (

@@ -5,10 +5,12 @@ import styles from './TvShow.scss';
 
 import SubButton from '../common/SubButton/SubButton';
 import Tooltip from '../common/Tooltip/Tooltip';
+import { subscribe } from '../../actions/subscriptions';
 
 const TvShow = ({
                     data:
                         {
+                            content_id,
                             title,
                             poster_url,
                             seasons,
@@ -20,10 +22,9 @@ const TvShow = ({
                             isSubscribed,
                         }
                 }) => {
-
-    const handleSubBtnClick = useCallback(() => {
-
-    });
+    const handleSubBtnClick = useCallback(async () => {
+        return await subscribe(content_id);
+    }, [content_id]);
 
     return (
         <div className={styles.tvShow}>

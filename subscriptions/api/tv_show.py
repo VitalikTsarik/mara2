@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AnonymousUser
-from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.status import HTTP_404_NOT_FOUND
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from subscriptions.models import TvShow, Subscription
@@ -16,7 +16,7 @@ class TvShowViewSet(ReadOnlyModelViewSet):
         try:
             tv_show = TvShow.objects.get(content_id=content_id)
         except TvShow.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return Response(status=HTTP_404_NOT_FOUND)
 
         serializer = self.serializer_class(tv_show)
         return Response(serializer.data)
@@ -31,7 +31,7 @@ class TvShowImdbViewSet(ReadOnlyModelViewSet):
         tv_show = TvShow.objects.get_or_fetch(imdb_id)
 
         if tv_show is None:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return Response(status=HTTP_404_NOT_FOUND)
 
         serializer = self.serializer_class(tv_show)
         data = serializer.data

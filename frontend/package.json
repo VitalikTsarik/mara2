@@ -9,6 +9,7 @@
     "build": "webpack --config config/webpack.prod.js"
   },
   "dependencies": {
+    "js-cookie": "^2.2.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-router-dom": "^5.1.2"
