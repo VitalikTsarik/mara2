@@ -1,37 +1,32 @@
 @import '../../../styles/variables';
 @import '../../../styles/colors';
 
-$item-width: 182px;
-$item-height: 268px;
+$item-width: 250px;
+$item-height: 350px;
 $overlay-color: rgb(0, 10, 30);
 
 .item {
     position: relative;
     overflow: hidden;
-    width: $item-width;
-    height: $item-height;
     transition: all 0.4s;
 
     &:hover {
         box-shadow: 0 18px 20px -9px rgba(0, 10, 30, 0.75);
 
-        & .title {
-            margin-top: 30%;
+        & .content {
+            top: 0;
+            opacity: 100%;
+        }
 
+        & .title {
             &:after {
                 width: 80%;
-                animation: changeLetter 0.3s 1 linear;
+                animation: changeLetter 2s 1 linear;
             }
         }
 
         & .overlay {
             background: rgba($overlay-color, 0.7);
-        }
-
-        & .subBtn {
-            bottom: 80px;
-            transition: all 0.3s;
-            opacity: 1;
         }
     }
 }
@@ -39,25 +34,35 @@ $overlay-color: rgb(0, 10, 30);
 .bgPoster {
     width: $item-width;
     height: $item-height;
+    object-fit: cover;
 }
 
 .overlay {
     position: absolute;
     top: 0;
     left: 0;
-    width: $item-width;
-    height: $item-height;
+    width: 100%;
+    height: 100%;
     transition: background 0.3s ease-in;
     background: rgba($overlay-color, 0.35);
 }
 
-.title {
+.content {
     position: absolute;
-    top: 0;
-    left: 5%;
-    width: 90%;
-    margin-top: 50%;
-    transition: all 0.6s;
+    top: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 20%;
+    padding-right: 5%;
+    padding-left: 5%;
+    transition: all 0.4s;
+    opacity: 0;
+}
+
+.title {
+    font-size: 30px;
     text-align: center;
 
     &:after {
@@ -66,18 +71,12 @@ $overlay-color: rgb(0, 10, 30);
         height: 2px;
         margin: 10px auto;
         content: '';
-        transition: all 0.2s;
+        transition: all 0.2s 0.3s;
         background: $text;
     }
 }
 
 .subBtn {
-    position: absolute;
-    bottom: -40px;
     display: block;
-    margin-left: 50%;
     user-select: none;
-    transition: all 0.2s;
-    transform: translate(-50%);
-    opacity: 0;
 }
