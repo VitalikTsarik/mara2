@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import layout from '../styles/layout.scss';
 
@@ -9,6 +9,7 @@ import { ApiUrls, getTvShowApiUrlByImdbId } from './common/DataProvider/urls';
 import { RouterUrls } from './common/urls';
 import TvShow from './TvShow/TvShow';
 import List from './subscriptions/List/List';
+import Page404 from './Page404/Page404';
 
 const App = () => {
     return (
@@ -17,16 +18,11 @@ const App = () => {
                 <Header />
                 <div className={layout.container}>
                     <Switch>
-                        <Route path={RouterUrls.SUBSCRIPTIONS}>
+                        <Route exact path={RouterUrls.SUBSCRIPTIONS}>
                             <DataProvider
                                 url={ApiUrls.SUBSCRIPTIONS}
                                 key={RouterUrls.SUBSCRIPTIONS}
-                                render={() => (
-                                    <DataProvider
-                                        url={ApiUrls.SUBSCRIPTIONS}
-                                        render={data => <List data={data} />}
-                                    />
-                                )}
+                                render={(data) => (<List data={data} />)}
                             />
                         </Route>
                         <Route exact path={RouterUrls.HOME}>
@@ -44,6 +40,9 @@ const App = () => {
                                 );
                             }}
                         />
+                        <Route path="*">
+                            <Page404 />
+                        </Route>
                     </Switch>
                 </div>
             </>

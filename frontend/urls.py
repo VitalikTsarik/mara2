@@ -1,7 +1,8 @@
-from django.urls import path
+from django.urls import path, re_path
 
-from . import views
+from .views import IndexView
 
 urlpatterns = [
-    path('', views.index),
+    path('', IndexView.as_view()),
+    re_path(r'^(?:.*)/?$', IndexView.as_view()),
 ]
