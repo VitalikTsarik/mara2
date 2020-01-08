@@ -1,11 +1,11 @@
 import React from 'react';
-import { HashRouter as Router, Route, Switch, Redirect, Link } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
 import layout from '../styles/layout.scss';
 
 import Header from './Header/Header';
 import { DataProvider } from './common/DataProvider/DataProvider';
-import { ApiUrls, getTvShowApiUrl, getTvShowApiUrlByImdbId } from './common/DataProvider/urls';
+import { ApiUrls, getTvShowApiUrlByImdbId } from './common/DataProvider/urls';
 import { RouterUrls } from './common/urls';
 import TvShow from './TvShow/TvShow';
 import List from './subscriptions/List/List';

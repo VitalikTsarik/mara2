@@ -12,8 +12,8 @@ const SubButton = ({onClick, isSub}) => {
     const handleClick = useCallback(() => {
         setIsLoading(true);
         onClick().then(() => {
-                setIsSuccess(true);
-            })
+            setIsSuccess(true);
+        })
             .catch(() => {
                 setIsSuccess(false);
             })

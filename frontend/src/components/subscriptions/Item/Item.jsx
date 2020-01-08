@@ -1,7 +1,8 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './Item.scss';
+
 import SubButton from '../../common/SubButton/SubButton';
 import { subscribe } from '../../../actions/subscriptions';
 
