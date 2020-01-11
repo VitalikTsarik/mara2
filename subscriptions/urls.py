@@ -5,11 +5,11 @@ from .api import TvShowViewSet, TvShowImdbViewSet, SubscriptionsViewSet
 from .api.subscriptions import SubscribeView
 
 router = DefaultRouter()
-router.register('api/tv_show/imdb', TvShowImdbViewSet)
-router.register('api/tv_show', TvShowViewSet)
-router.register('api/subscriptions', SubscriptionsViewSet)
+router.register('tv_show/imdb', TvShowImdbViewSet)
+router.register('tv_show', TvShowViewSet)
+router.register('subscriptions', SubscriptionsViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('api/subscribe/<int:content_id>', SubscribeView.as_view()),
+    path('subscribe/<int:content_id>', SubscribeView.as_view()),
 ]
