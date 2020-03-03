@@ -1,5 +1,6 @@
+from rest_framework.authentication import BasicAuthentication
 from rest_framework.generics import GenericAPIView, RetrieveAPIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from knox.models import AuthToken
 
@@ -8,6 +9,8 @@ from .serializers import UserSerializer, RegisterSerializer, LoginSerializer
 
 class RegisterView(GenericAPIView):
     serializer_class = RegisterSerializer
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -25,6 +28,8 @@ class RegisterView(GenericAPIView):
 
 class LoginView(GenericAPIView):
     serializer_class = LoginSerializer
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

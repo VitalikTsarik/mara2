@@ -10,11 +10,14 @@ import { RouterUrls } from './common/urls';
 import TvShow from './TvShow/TvShow';
 import List from './subscriptions/List/List';
 import Page404 from './Page404/Page404';
+import Login from './accounts/Login/Login';
+import { AuthProvider } from '../context/auth/AuthContext';
+
 
 const App = () => {
     return (
-        <Router>
-            <>
+        <AuthProvider>
+            <Router>
                 <Header />
                 <div className={layout.container}>
                     <Switch>
@@ -40,13 +43,16 @@ const App = () => {
                                 );
                             }}
                         />
+                        <Route exact path={RouterUrls.LOGIN}>
+                            <Login />
+                        </Route>
                         <Route path="*">
                             <Page404 />
                         </Route>
                     </Switch>
                 </div>
-            </>
-        </Router>
+            </Router>
+        </AuthProvider>
     );
 };
 

@@ -3,6 +3,9 @@ const ApiUrls = Object.freeze({
     TV_SHOW: '/api/tv_show/',
     TV_SHOW_IMDB: '/api/tv_show/imdb/',
     SUBSCRIBE: '/api/subscribe/',
+    LOGIN: '/api/login/',
+    LOGOUT: '/api/logout/',
+    REGISTER: '/api/register/',
 });
 
 const getTvShowApiUrl = (contenId) => {
