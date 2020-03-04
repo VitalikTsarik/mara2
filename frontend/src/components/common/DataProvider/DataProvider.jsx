@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
+import { withAuthorization } from '../../../actions/auth';
+
 const useData = (url) => {
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch(url).then(res => {
+        fetch(url, withAuthorization({
+            method: 'get',
+        })).then(res => {
             if (res.ok) {
                 return res.json();
             } else {

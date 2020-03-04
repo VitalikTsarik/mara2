@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 
 from decouple import config, Csv
 
@@ -28,7 +29,6 @@ INSTALLED_APPS = [
 if DEBUG:
     INSTALLED_APPS.append('django_extensions')
 
-
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
@@ -41,6 +41,12 @@ REST_FRAMEWORK = {
 
 if DEBUG:
     REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'].append('rest_framework.renderers.BrowsableAPIRenderer')
+
+REST_KNOX = {
+    'TOKEN_TTL': timedelta(days=7),
+    'USER_SERIALIZER': 'accounts.serializers.UserSerializer',
+    'AUTO_REFRESH': True,
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

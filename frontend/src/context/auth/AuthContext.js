@@ -11,31 +11,27 @@ const AuthContext = createContext({
 
 function useProvideAuth() {
     const [user, setUser] = useState(null);
-    const [token, setToken] = useState(null);
 
     const login = useCallback(async (username, password) => {
         return loginRequest(username, password).then((data) => {
             setUser(data.user);
-            setToken(data.token);
         });
-    }, [setUser, setToken]);
+    }, []);
 
     const logout = useCallback(async () => {
-        return logoutRequest(token).then(() => {
+        return logoutRequest().then(() => {
             setUser(null);
-            setToken(null);
         });
-    }, [token, setUser, setToken]);
+    }, []);
 
     const register = useCallback((username, email, password) => {
         registerRequest(username, email, password).then((data) => {
             setUser(data.user);
-            setToken(data.token);
         }).catch((error) => {
             console.log(error)
         });
 
-    }, [setUser, setToken]);
+    }, []);
 
     return {
         user,

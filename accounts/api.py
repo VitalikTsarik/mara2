@@ -1,48 +1,53 @@
-from rest_framework.authentication import BasicAuthentication
-from rest_framework.generics import GenericAPIView, RetrieveAPIView
+from knox.views import LoginView as KnoxLoginView
+from django.contrib.auth import login
+from rest_framework.generics import RetrieveAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from rest_framework.response import Response
-from knox.models import AuthToken
 
 from .serializers import UserSerializer, RegisterSerializer, LoginSerializer
 
 
-class RegisterView(GenericAPIView):
+class RegisterView(KnoxLoginView):
     serializer_class = RegisterSerializer
-    authentication_classes = [BasicAuthentication]
     permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
+        serializer = RegisterSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
 
-        user_serializer = UserSerializer(user, context=self.get_serializer_context())
-        _, token = AuthToken.objects.create(user)
+        login(request, user)
 
-        return Response({
-            'user': user_serializer.data,
-            'token': token,
-        })
+        response = super().post(request)
+        token = response.data['token']
+        del response.data['token']
+
+        response.set_cookie(
+            'auth_token',
+            token,
+            samesite='strict',
+        )
+        return response
 
 
-class LoginView(GenericAPIView):
-    serializer_class = LoginSerializer
-    authentication_classes = [BasicAuthentication]
+class LoginView(KnoxLoginView):
     permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
+        serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data
+        login(request, user)
 
-        user_serializer = UserSerializer(user, context=self.get_serializer_context())
-        _, token = AuthToken.objects.create(user)
+        response = super().post(request)
+        token = response.data['token']
+        del response.data['token']
 
-        return Response({
-            'user': user_serializer.data,
-            'token': token,
-        })
+        response.set_cookie(
+            'auth_token',
+            token,
+            samesite='strict',
+        )
+        return response
 
 
 class UserView(RetrieveAPIView):

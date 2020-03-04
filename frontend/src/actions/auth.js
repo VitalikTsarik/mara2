@@ -1,6 +1,9 @@
+import Cookies from 'js-cookie';
+
 import { ApiUrls } from '../components/common/DataProvider/urls';
 
-const withAuthorization = (token, requestObj) => {
+const withAuthorization = (requestObj) => {
+    const token = Cookies.get('auth_token');
     requestObj.headers = {
         Authorization: `Token ${token}`,
         ...requestObj.headers
@@ -27,12 +30,12 @@ const loginRequest = async (username, password) => {
     });
 };
 
-const logoutRequest = async (token) => {
-    return await fetch(ApiUrls.LOGOUT, withAuthorization(token, {
+const logoutRequest = async () => {
+    return await fetch(ApiUrls.LOGOUT, withAuthorization({
         method: 'post',
     })).then(res => {
         if (res.ok) {
-
+            Cookies.remove('auth_token');
         } else {
             throw Error('Error Logout');
         }
@@ -59,4 +62,4 @@ const registerRequest = async (username, email, password) => {
     });
 };
 
-export { loginRequest, logoutRequest, registerRequest };
+export { loginRequest, logoutRequest, registerRequest, withAuthorization };
