@@ -5,6 +5,10 @@ import styles from './List.scss';
 import Item from '../Item/Item';
 
 const List = ({data}) => {
+    if (!data) {
+        return null;
+    }
+
     return (
         <div className={styles.list}>
             {data.map((item) => (

@@ -23,9 +23,10 @@ const App = () => {
                     <Switch>
                         <Route exact path={RouterUrls.SUBSCRIPTIONS}>
                             <DataProvider
-                                url={ApiUrls.SUBSCRIPTIONS}
                                 key={RouterUrls.SUBSCRIPTIONS}
-                                render={(data) => (<List data={data} />)}
+                                url={ApiUrls.SUBSCRIPTIONS}
+                                isPrivate
+                                render={(data) => (<List datca={data} />)}
                             />
                         </Route>
                         <Route exact path={RouterUrls.HOME}>
@@ -33,11 +34,11 @@ const App = () => {
                         <Route
                             path={RouterUrls.TV_SHOW}
                             render={({match}) => {
-                                const contentId = getTvShowApiUrlByImdbId(match.params.contentId);
+                                const url = getTvShowApiUrlByImdbId(match.params.contentId);
                                 return (
                                     <DataProvider
-                                        key={contentId}
-                                        url={contentId}
+                                        key={url}
+                                        url={url}
                                         render={data => <TvShow data={data} />}
                                     />
                                 );
