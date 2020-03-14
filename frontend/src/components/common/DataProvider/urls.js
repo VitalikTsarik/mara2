@@ -6,6 +6,7 @@ const ApiUrls = Object.freeze({
     LOGIN: '/api/login/',
     LOGOUT: '/api/logout/',
     REGISTER: '/api/register/',
+    USER: '/api/user/',
 });
 
 const getTvShowApiUrl = (contenId) => {

@@ -26,7 +26,7 @@ const App = () => {
                                 key={RouterUrls.SUBSCRIPTIONS}
                                 url={ApiUrls.SUBSCRIPTIONS}
                                 isPrivate
-                                render={(data) => (<List datca={data} />)}
+                                render={(data) => (<List data={data} />)}
                             />
                         </Route>
                         <Route exact path={RouterUrls.HOME}>

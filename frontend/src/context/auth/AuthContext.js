@@ -1,6 +1,6 @@
-import React, { createContext, useCallback, useState, useContext } from 'react';
+import React, { createContext, useCallback, useState, useContext, useEffect } from 'react';
 
-import { loginRequest, logoutRequest, registerRequest } from '../../actions/auth';
+import { loginRequest, logoutRequest, registerRequest, userRequest } from '../../actions/auth';
 
 const AuthContext = createContext({
     user: null,
@@ -11,6 +11,16 @@ const AuthContext = createContext({
 
 function useProvideAuth() {
     const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        if (!user) {
+            userRequest().then((user) => {
+                setUser(user);
+            }).catch(() => {
+                setUser(null);
+            });
+        }
+    });
 
     const login = useCallback(async (username, password) => {
         return loginRequest(username, password).then((data) => {
@@ -27,10 +37,7 @@ function useProvideAuth() {
     const register = useCallback((username, email, password) => {
         registerRequest(username, email, password).then((data) => {
             setUser(data.user);
-        }).catch((error) => {
-            console.log(error)
         });
-
     }, []);
 
     return {

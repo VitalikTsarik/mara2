@@ -62,4 +62,19 @@ const registerRequest = async (username, email, password) => {
     });
 };
 
-export { loginRequest, logoutRequest, registerRequest, withAuthorization };
+const userRequest = async () => {
+    return await fetch(ApiUrls.USER, withAuthorization({
+        method: 'get',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })).then(res => {
+        if (res.ok) {
+            return res.json();
+        } else {
+            throw Error('Error Getting User');
+        }
+    });
+};
+
+export { loginRequest, logoutRequest, registerRequest, withAuthorization, userRequest };
