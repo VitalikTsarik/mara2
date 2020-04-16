@@ -24,20 +24,20 @@
         padding: 10px;
         cursor: pointer;
         text-decoration: none;
-        color: $text;
+        color: map_get($colors, 'text');
 
         &:hover {
             border-radius: 1.5em;
-            background-color: rgba(rgba($primary, 0.08), 0.1);
+            background-color: rgba(rgba(map_get($colors, 'primary'), 0.08), 0.1);
         }
 
         &__active {
-            color: $primary;
+            color: map_get($colors, 'primary');
             border-radius: 1.5em;
-            background-color: rgba($primary, 0.08);
+            background-color: rgba(map_get($colors, 'primary'), 0.08);
 
             &:hover {
-                background-color: rgba($primary, 0.08);
+                background-color: rgba(map_get($colors, 'primary'), 0.08);
             }
         }
     }

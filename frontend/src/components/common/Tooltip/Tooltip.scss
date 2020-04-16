@@ -16,9 +16,9 @@
     width: 120px;
     padding: 5px 0;
     text-align: center;
-    color: $text;
+    color: map_get($colors, 'text');
 
     border-radius: 6px;
-    background-color: $dark-dp12;
+    background-color: map_get($colors, 'dark-dp12');
 }
 

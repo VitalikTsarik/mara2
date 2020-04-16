@@ -70,7 +70,7 @@ $overlay-color: rgb(0, 10, 30);
         margin: 10px auto;
         content: '';
         transition: all 0.2s 0.3s;
-        background: $text;
+        background: map_get($colors, 'text');
     }
 }
 

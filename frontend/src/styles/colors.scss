@@ -1,9 +1,17 @@
-$background: #121212;
-$dark-dp6: #2c2c2c;
-$dark-dp8: #2e2e2e;
-$dark-dp12: #333;
-$dark-dp24: #383838;
-$text: #e3e3e3;
-$primary: #bb86fc;
-$secondary: #03dac5;
-$error: #cf6679;
+$colors: (
+        background: #121212,
+        dark-dp6: #2c2c2c,
+        dark-dp8: #2e2e2e,
+        dark-dp12: #333,
+        dark-dp24: #383838,
+        text: #e3e3e3,
+        primary: #bb86fc,
+        secondary: #03dac5,
+        error: #cf6679,
+);
+
+:export {
+    @each $key, $value in $colors {
+        #{unquote($key)}: $value;
+    }
+}

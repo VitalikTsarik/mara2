@@ -11,18 +11,20 @@ $extend-anim: 0.4s;
     margin-right: 50px;
     padding: 0 10px;
     cursor: pointer;
-    border: $primary 2px solid;
+    border: map_get($colors, 'primary') 2px solid;
     border-radius: 300px;
-    background-color: $dark-dp24;
+    background-color: map_get($colors, 'dark-dp24');
 
     &__extended {
         cursor: default;
     }
 }
 
-.input {
+input[type="text"].input {
     line-height: 40px;
     width: 0;
+    margin: 0;
+    padding: 0;
     transition: all $extend-anim ease-out;
     border: 0;
     outline: 0;

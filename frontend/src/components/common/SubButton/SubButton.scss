@@ -14,10 +14,10 @@ $spinner-width: $button-width/6;
     user-select: none;
     transition: border-radius linear 0.05s, width linear 0.05s;
     text-align: center;
-    color: $dark-dp6;
+    color: map_get($colors, 'dark-dp6');
     border: 0;
     border-radius: 25px;
-    background: $primary;
+    background: map_get($colors, 'primary');
     appearance: none;
 
 
@@ -45,7 +45,7 @@ $spinner-width: $button-width/6;
             animation: spin ease-in 2.5s forwards;
             animation-name: spin;
             animation-duration: 2.5s;
-            border: 4px solid $dark-dp6;
+            border: 4px solid map_get($colors, 'dark-dp6');
             border-left-color: transparent;
             border-radius: 50%;
             animation-fill-mode: forwards;
@@ -61,7 +61,7 @@ $spinner-width: $button-width/6;
             transform: translate(-50%, -50%) rotate(0deg) scale(0);
             animation: success ease-in 0.15s forwards;
             animation-delay: 2.5s;
-            border: 4px solid $dark-dp6;
+            border: 4px solid map_get($colors, 'dark-dp6');
             border-top: 0;
             border-right: 0;
         }
@@ -82,7 +82,7 @@ $spinner-width: $button-width/6;
                 animation: error ease-in 0.5s forwards;
                 animation-delay: 2.5s;
                 text-align: center;
-                color: $dark-dp6;
+                color: map_get($colors, 'dark-dp6');
             }
         }
     }
@@ -116,21 +116,21 @@ $spinner-width: $button-width/6;
     }
     to {
         transform: translate(-50%, -50%) scale(1);
-        background-color: $error;
+        background-color: map_get($colors, 'error');
     }
 }
 
 @keyframes vibrate {
     0%, 30%, 60%, 85%, 100% {
         left: 0;
-        background-color: $error;
+        background-color: map_get($colors, 'error');
     }
     10%, 40%, 90%, 70% {
         left: -2px;
-        background-color: $error;
+        background-color: map_get($colors, 'error');
     }
     20%, 50%, 80%, 95% {
         left: 2px;
-        background-color: $error;
+        background-color: map_get($colors, 'error');
     }
 }
