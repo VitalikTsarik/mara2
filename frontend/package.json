@@ -9,6 +9,8 @@
     "build": "webpack --config config/webpack.prod.js"
   },
   "dependencies": {
+    "@material-ui/core": "^4.9.10",
+    "formik": "^2.1.1",
     "js-cookie": "^2.2.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
@@ -24,7 +26,7 @@
     "classnames": "^2.2.6",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.2.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.0",
