@@ -17,4 +17,8 @@ const getTvShowApiUrlByImdbId = (imdbId) => {
     return ApiUrls.TV_SHOW_IMDB.replace(':id', imdbId);
 };
 
-export { ApiUrls, getTvShowApiUrl, getTvShowApiUrlByImdbId };
+const getSubscribeUrl = (id) => {
+    return ApiUrls.SUBSCRIBE + id;
+};
+
+export { ApiUrls, getTvShowApiUrl, getTvShowApiUrlByImdbId, getSubscribeUrl };

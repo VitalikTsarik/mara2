@@ -1,10 +1,10 @@
 import Cookies from 'js-cookie';
 
-import { ApiUrls } from '../components/common/DataProvider/urls';
+import { getSubscribeUrl } from '../components/common/DataProvider/urls';
 import { withAuthorization } from './auth';
 
-const subscribe = async (token, id) => {
-    const url = ApiUrls.SUBSCRIBE + id;
+const subscribe = async (id) => {
+    const url = getSubscribeUrl(id);
     const csrfToken = Cookies.get('csrftoken');
 
     return await fetch(url, withAuthorization({
