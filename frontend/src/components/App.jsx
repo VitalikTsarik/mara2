@@ -14,6 +14,7 @@ import Page404 from './Page404/Page404';
 import Login from './accounts/Login/Login';
 import { AuthProvider } from '../context/auth/AuthContext';
 import { defaultTheme } from '../context/theme';
+import Register from './accounts/Register/Register';
 
 
 const App = () => {
@@ -49,6 +50,9 @@ const App = () => {
                             />
                             <Route exact path={RouterUrls.LOGIN}>
                                 <Login />
+                            </Route>
+                            <Route exact path={RouterUrls.REGISTER}>
+                                <Register />
                             </Route>
                             <Route path="*">
                                 <Page404 />

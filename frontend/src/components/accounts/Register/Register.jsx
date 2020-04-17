@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import FormLabel from '@material-ui/core/FormLabel';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import styles from './Login.scss';
+import styles from './Register.scss';
 
 import { useAuth } from '../../../context/auth/AuthContext';
 import { getHomeUrl } from '../../common/urls';
@@ -15,35 +15,44 @@ import { getHomeUrl } from '../../common/urls';
 const loginValidation = yup.object().shape({
     username: yup
         .string()
+        .max(150, 'Too long, buddy')
+        .matches(/[a-zA-Z0-9@.+\-_]/, 'Username can only contain Latin letters, digits and @/./+/-/_ ')
+        .required(),
+    email: yup
+        .string()
+        .email('Email is invalid')
         .required(),
     password: yup
         .string()
+        .min(6, 'Password is too short - should be at least 6 characters')
+        .matches(/[a-zA-Z0-9]/, 'Password can only contain Latin letters and digits.')
         .required(),
 });
 
-const Login = ({}) => {
-    const {login} = useAuth();
+const Register = ({}) => {
+    const {register} = useAuth();
     const history = useHistory();
 
     const [waiting, setWaiting] = useState(false);
 
-    const handleSubmit = useCallback(async ({username, password}, {setStatus}) => {
+    const handleSubmit = useCallback(async ({username, email, password}, {setStatus}) => {
         try {
             setWaiting(true);
-            await login(username, password);
+            await register(username, email, password);
             history.push(getHomeUrl());
         } catch (e) {
-            setStatus({submit: 'Invalid username or password'});
+            setStatus({submit: 'Something wrong. Try again later'});
         } finally {
             setWaiting(false);
         }
-    }, [login]);
+    }, [register]);
 
     return (
-        <div className={styles.login}>
+        <div className={styles.register}>
             <Formik
                 initialValues={{
                     username: '',
+                    email: '',
                     password: '',
                 }}
                 validationSchema={loginValidation}
@@ -61,7 +70,19 @@ const Login = ({}) => {
                                 fullWidth
                                 onChange={handleChange}
                                 value={values.username}
+                                required
                                 error={Boolean(errors.username)}
+                            />
+                            <TextField
+                                name={'email'}
+                                variant={'outlined'}
+                                helperText={errors.email}
+                                label="Email"
+                                fullWidth
+                                onChange={handleChange}
+                                value={values.email}
+                                required
+                                error={Boolean(errors.email)}
                             />
                             <TextField
                                 name={'password'}
@@ -72,6 +93,7 @@ const Login = ({}) => {
                                 fullWidth
                                 onChange={handleChange}
                                 value={values.password}
+                                required
                                 error={Boolean(errors.password)}
                             />
                             <div className={styles.submitBtn}>
@@ -83,7 +105,7 @@ const Login = ({}) => {
                                     size={'large'}
                                     onClick={handleSubmit}
                                 >
-                                    login
+                                    register
                                 </Button>
                             </div>
                             {status && <FormLabel error>{status.submit}</FormLabel>}
@@ -101,4 +123,4 @@ const Login = ({}) => {
     );
 };
 
-export default Login;
+export default Register;
