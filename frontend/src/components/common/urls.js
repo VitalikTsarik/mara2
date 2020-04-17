@@ -2,6 +2,7 @@ const RouterUrls = Object.freeze({
     HOME: ['/home', '/'],
     SUBSCRIPTIONS: '/list',
     TV_SHOW: '/tv-show/:contentId',
+    LOGIN: '/login',
 });
 
 const getTvShowUrl = (contenId) => {
