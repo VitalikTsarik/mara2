@@ -31,7 +31,7 @@ const Login = ({}) => {
         try {
             setWaiting(true);
             await login(username, password);
-            history.push(getHomeUrl());
+            setTimeout(() => history.push(getHomeUrl()));
         } catch (e) {
             setStatus({submit: 'Invalid username or password'});
         } finally {

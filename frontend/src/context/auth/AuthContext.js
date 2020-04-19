@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useState, useContext, useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 import { loginRequest, logoutRequest, registerRequest, userRequest } from '../../actions/auth';
 
@@ -12,14 +13,18 @@ const AuthContext = createContext({
 function useProvideAuth() {
     const [user, setUser] = useState(null);
 
-    useEffect(() => {
-        if (!user) {
-            userRequest().then((user) => {
-                setUser(user);
-            }).catch(() => {
-                setUser(null);
-            });
+    const updateUser = useCallback(async () => {
+        try {
+            const responseUser = await userRequest();
+            if (!user || responseUser.id !== user.id) {
+                setUser(responseUser);
+            }
+        } catch (e) {
+            setUser(null);
         }
+    }, [userRequest, user]);
+    useEffect(() => {
+        updateUser();
     });
 
     const login = useCallback(async (username, password) => {
@@ -45,6 +50,7 @@ function useProvideAuth() {
         login,
         logout,
         register,
+        isAuthorized: Boolean(Cookies.get('auth_token')),
     };
 }
 

@@ -7,6 +7,7 @@ import layout from '../styles/layout.scss';
 import Header from './Header/Header';
 import { DataProvider } from './common/DataProvider/DataProvider';
 import { ApiUrls, getTvShowApiUrlByImdbId } from './common/DataProvider/urls';
+import PrivateRoute from './common/PrivateRoute/PrivateRoute';
 import { RouterUrls } from './common/urls';
 import TvShow from './TvShow/TvShow';
 import List from './subscriptions/List/List';
@@ -25,14 +26,14 @@ const App = () => {
                     <Header />
                     <div className={layout.container}>
                         <Switch>
-                            <Route exact path={RouterUrls.SUBSCRIPTIONS}>
+                            <PrivateRoute exact path={RouterUrls.SUBSCRIPTIONS} render={() => (
                                 <DataProvider
                                     key={RouterUrls.SUBSCRIPTIONS}
                                     url={ApiUrls.SUBSCRIPTIONS}
                                     isPrivate
                                     render={(data) => (<List data={data} />)}
-                                />
-                            </Route>
+                                />)}
+                            />
                             <Route exact path={RouterUrls.HOME}>
                             </Route>
                             <Route
