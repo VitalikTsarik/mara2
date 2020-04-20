@@ -7,6 +7,12 @@
     height: 70px;
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)), #121212;
 
+    &_items {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+    }
+
     &_logo {
         width: 60px;
         height: 60px;
