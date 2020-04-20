@@ -10,12 +10,12 @@ import SearchBar from './SearchBar/SearchBar';
 import { RouterUrls, getHomeUrl } from '../common/urls';
 import { useAuth } from '../../context/auth/AuthContext';
 import AuthorizationButtons from './AuthorizationButtons/AuthorizationButtons';
+import UserStatus from './UserStatus/UserStatus';
 
 const Header = () => {
-    const {isAuthorized} = useAuth();
+    const {isAuthorized, user} = useAuth();
     return (
         <nav className={classNames(styles.header, layout.container)}>
-            {/*<img className={styles.header_logo} src='/static/logo.png'/>*/}
             <div className={styles.header_items}>
                 <img className={styles.header_logo} src={Logo} alt='logo' />
                 <div className={styles.header_navBar}>
@@ -40,7 +40,7 @@ const Header = () => {
                     <SearchBar onSubmit={(value) => console.log(value)} />
                 </div>
             </div>
-            <AuthorizationButtons />
+            {isAuthorized ? <UserStatus /> : <AuthorizationButtons />}
         </nav>
     );
 };
