@@ -2,17 +2,12 @@
 @import 'colors';
 
 body {
-    color: $text;
-    background-color: $background;
-}
-
-input {
-    color: $text;
-    caret-color: $text;
+    color: map_get($colors, 'text');
+    background-color: map_get($colors, 'background');
 }
 
 .a {
-    color: $text;
+    color: map_get($colors, 'text');
 }
 
 .container {

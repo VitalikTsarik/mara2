@@ -20,15 +20,18 @@ $extend-anim: 0.4s;
     }
 }
 
-input[type="text"].input {
+.input {
+    font-size: 1.2rem;
     line-height: 40px;
     width: 0;
-    margin: 0;
     padding: 0;
     transition: all $extend-anim ease-out;
+    color: map_get($colors, 'text');
     border: 0;
-    outline: 0;
+    border-radius: 6px;
+    outline: none;
     background: none;
+    caret-color: map_get($colors, 'text');
 
     &__extended {
         width: 250px;
