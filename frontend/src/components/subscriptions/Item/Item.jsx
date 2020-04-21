@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './Item.scss';
@@ -6,14 +6,27 @@ import styles from './Item.scss';
 import SubButton from '../../common/SubButton/SubButton';
 import { subscribe } from '../../../actions/subscriptions';
 
-const Item = ({item: {content_id, title, poster_url}}) => {
+const Item = ({item: {content_id, title, poster_url}, onUnsub, skeleton}) => {
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    const onLoad = useCallback(() => {
+        setIsLoaded(true);
+    }, []);
+
     const handleSubBtnClick = useCallback(async () => {
-        return await subscribe(content_id);
-    }, [content_id]);
+        return await subscribe(content_id).then(() => onUnsub());
+    }, [content_id, onUnsub]);
 
     return (
         <div className={styles.item}>
-            <img className={styles.bgPoster} src={poster_url} alt='poster image' />
+            {!isLoaded && skeleton}
+            <img
+                style={isLoaded ? {} : {display: 'none'}}
+                className={styles.bgPoster}
+                src={poster_url}
+                alt={title}
+                onLoad={onLoad}
+            />
             <div className={styles.overlay} />
             <div className={styles.content}>
                 <div className={styles.title}>
@@ -32,6 +45,7 @@ const Item = ({item: {content_id, title, poster_url}}) => {
 
 Item.propTypes = {
     item: PropTypes.object.isRequired,
+    onUnsub: PropTypes.func.isRequired,
 };
 
 export default Item;

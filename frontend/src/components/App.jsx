@@ -13,9 +13,9 @@ import TvShow from './TvShow/TvShow';
 import List from './subscriptions/List/List';
 import Page404 from './Page404/Page404';
 import Login from './accounts/Login/Login';
+import Register from './accounts/Register/Register';
 import { AuthProvider } from '../context/auth/AuthContext';
 import { defaultTheme } from '../context/theme';
-import Register from './accounts/Register/Register';
 
 
 const App = () => {

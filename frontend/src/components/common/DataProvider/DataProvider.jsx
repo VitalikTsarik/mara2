@@ -34,7 +34,13 @@ const useData = (url, isPrivate) => {
     return {data, isLoading, error};
 };
 
-const DataProvider = ({url, isPrivate, render, errorMessage}) => {
+const DataProvider = ({
+                          url,
+                          isPrivate,
+                          render,
+                          errorMessage,
+                          skeleton = <p>Loading...</p>
+}) => {
     const {data, isLoading, error} = useData(url, isPrivate);
 
     if (error) {
@@ -42,7 +48,7 @@ const DataProvider = ({url, isPrivate, render, errorMessage}) => {
     }
 
     if (isLoading) {
-        return <p>Loading...</p>;
+        return skeleton;
     }
 
     return <>{render(data)}</>;
@@ -53,6 +59,7 @@ DataProvider.propTypes = {
     render: PropTypes.func.isRequired,
     errorMessage: PropTypes.string,
     isPrivate: PropTypes.bool,
+    skeleton: PropTypes.element,
 };
 
 DataProvider.defaultProps = {
