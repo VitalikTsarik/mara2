@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import styles from './Item.scss';
 
 import SubButton from '../../common/SubButton/SubButton';
-import { subscribe } from '../../../actions/subscriptions';
 
 const Item = ({item: {content_id, title, poster_url}, onUnsub, skeleton}) => {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -12,10 +11,6 @@ const Item = ({item: {content_id, title, poster_url}, onUnsub, skeleton}) => {
     const onLoad = useCallback(() => {
         setIsLoaded(true);
     }, []);
-
-    const handleSubBtnClick = useCallback(async () => {
-        return await subscribe(content_id).then(() => onUnsub());
-    }, [content_id, onUnsub]);
 
     return (
         <div className={styles.item}>
@@ -34,8 +29,9 @@ const Item = ({item: {content_id, title, poster_url}, onUnsub, skeleton}) => {
                 </div>
                 <div className={styles.subBtn}>
                     <SubButton
-                        onClick={handleSubBtnClick}
+                        contentId={content_id}
                         isSub={true}
+                        // onSubCallback={onUnsub}
                     />
                 </div>
             </div>

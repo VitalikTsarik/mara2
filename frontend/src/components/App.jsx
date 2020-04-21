@@ -30,7 +30,6 @@ const App = () => {
                                 <DataProvider
                                     key={RouterUrls.SUBSCRIPTIONS}
                                     url={ApiUrls.SUBSCRIPTIONS}
-                                    isPrivate
                                     render={(data) => (<List data={data} />)}
                                 />)}
                             />

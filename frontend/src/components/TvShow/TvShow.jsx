@@ -28,26 +28,30 @@ const TvShow = ({
         setIsLoaded(true);
     }, []);
 
-    const handleSubBtnClick = useCallback(async () => {
-        return await subscribe(content_id);
-    }, [content_id]);
-
     return (
         <div className={styles.tvShow}>
-            {!isLoaded && (
-                <Placeholder
-                    width={400}
-                    height={500}
-                    title={title}
+            <div>
+                {!isLoaded && (
+                    <Placeholder
+                        width={400}
+                        height={500}
+                        title={title}
+                    />
+                )}
+                <img
+                    style={isLoaded ? {} : {display: 'none'}}
+                    className={styles.poster}
+                    src={poster_url}
+                    alt='poster'
+                    onLoad={onLoad}
                 />
-            )}
-            <img
-                style={isLoaded ? {} : {display: 'none'}}
-                className={styles.poster}
-                src={poster_url}
-                alt='poster'
-                onLoad={onLoad}
-            />
+                <div className={styles.subBtn}>
+                    <SubButton
+                        contentId={content_id}
+                        isSub={isSubscribed}
+                    />
+                </div>
+            </div>
             <div className={styles.overview}>
                 <div className={styles.title}>
                     {title} ({year})
@@ -70,12 +74,6 @@ const TvShow = ({
                     <div className={styles.infoContent}>{genres}</div>
                     <div className={styles.infoName}>years</div>
                     <div className={styles.infoContent}>{years}</div>
-                </div>
-                <div className={styles.subBtn}>
-                    <SubButton
-                        onClick={handleSubBtnClick}
-                        isSub={isSubscribed}
-                    />
                 </div>
             </div>
         </div>

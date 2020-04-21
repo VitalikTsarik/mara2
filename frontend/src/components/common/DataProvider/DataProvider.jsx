@@ -2,16 +2,19 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { withAuthorization } from '../../../actions/auth';
+import { useAuth } from '../../../context/auth/AuthContext';
 
-const useData = (url, isPrivate) => {
+const useData = (url) => {
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const {isAuthorized} = useAuth();
+
     let requestObj = {
         method: 'get',
     };
-    if (isPrivate) {
+    if (isAuthorized) {
         requestObj = withAuthorization(requestObj);
     }
 
@@ -36,12 +39,11 @@ const useData = (url, isPrivate) => {
 
 const DataProvider = ({
                           url,
-                          isPrivate,
                           render,
                           errorMessage,
-                          skeleton = <p>Loading...</p>
+                          skeleton = <p>Loading...</p>,
 }) => {
-    const {data, isLoading, error} = useData(url, isPrivate);
+    const {data, isLoading, error} = useData(url);
 
     if (error) {
         return <p>{errorMessage}</p>;
