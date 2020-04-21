@@ -3,7 +3,10 @@ import React, { useCallback, useMemo, useState } from 'react';
 import styles from './List.scss';
 
 import Item from '../Item/Item';
-import ItemPlaceholder from '../ItemPlaceholder/ItemPlaceholder';
+import Placeholder from '../../common/Placeholder/Placeholder';
+
+const itemHeight = 350;
+const itemWidth = 250;
 
 const List = ({data}) => {
     if (!data) {
@@ -18,7 +21,12 @@ const List = ({data}) => {
         }));
     }, [items]);
 
-    const skeleton = useMemo(() => <ItemPlaceholder />, []);
+    const skeleton = useMemo(() => (
+        <Placeholder
+            width={itemWidth}
+            height={itemHeight}
+        />
+    ), []);
 
     return (
         <div className={styles.list}>

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import classNames from 'classnames';
 
 import styles from './TvShow.scss';
@@ -6,6 +6,7 @@ import styles from './TvShow.scss';
 import SubButton from '../common/SubButton/SubButton';
 import Tooltip from '../common/Tooltip/Tooltip';
 import { subscribe } from '../../actions/subscriptions';
+import Placeholder from '../common/Placeholder/Placeholder';
 
 const TvShow = ({
                     data:
@@ -22,13 +23,31 @@ const TvShow = ({
                             isSubscribed,
                         }
                 }) => {
+    const [isLoaded, setIsLoaded] = useState(false);
+    const onLoad = useCallback(() => {
+        setIsLoaded(true);
+    }, []);
+
     const handleSubBtnClick = useCallback(async () => {
         return await subscribe(content_id);
     }, [content_id]);
 
     return (
         <div className={styles.tvShow}>
-            <img className={styles.poster} src={poster_url} alt='poster' />
+            {!isLoaded && (
+                <Placeholder
+                    width={400}
+                    height={500}
+                    title={title}
+                />
+            )}
+            <img
+                style={isLoaded ? {} : {display: 'none'}}
+                className={styles.poster}
+                src={poster_url}
+                alt='poster'
+                onLoad={onLoad}
+            />
             <div className={styles.overview}>
                 <div className={styles.title}>
                     {title} ({year})
