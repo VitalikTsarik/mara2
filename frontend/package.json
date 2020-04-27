@@ -12,9 +12,11 @@
     "@material-ui/core": "^4.9.10",
     "formik": "^2.1.4",
     "js-cookie": "^2.2.1",
+    "qs": "^6.9.3",
     "react": "^16.13.1",
     "react-content-loader": "^5.0.4",
     "react-dom": "^16.13.1",
+    "react-infinite-scroller": "^1.2.4",
     "react-router-dom": "^5.1.2",
     "yup": "^0.28.3"
   },

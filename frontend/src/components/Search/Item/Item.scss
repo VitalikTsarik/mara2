@@ -1,0 +1,23 @@
+@import '../../../styles/colors';
+
+.item {
+    display: flex;
+    cursor: pointer;
+
+    &_poster {
+        width: 250px;
+    }
+
+    &_summary {
+        margin-left: 20px;
+    }
+
+    &_title {
+        font-size: 1.4rem;
+        color: map_get($colors, 'primary');
+    }
+
+    &_info {
+        margin-top: 10px;
+    }
+}

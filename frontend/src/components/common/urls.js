@@ -4,6 +4,7 @@ const RouterUrls = Object.freeze({
     TV_SHOW: '/tv-show/:contentId',
     LOGIN: '/login',
     REGISTER: '/register',
+    SEARCH: '/search',
 });
 
 const getTvShowUrl = (contenId) => {

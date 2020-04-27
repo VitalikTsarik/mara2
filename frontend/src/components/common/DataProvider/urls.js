@@ -7,6 +7,7 @@ const ApiUrls = Object.freeze({
     LOGOUT: '/api/logout/',
     REGISTER: '/api/register/',
     USER: '/api/user/',
+    SEARCH: '/api/search',
 });
 
 const getTvShowApiUrl = (contenId) => {
@@ -21,4 +22,13 @@ const getSubscribeUrl = (id) => {
     return ApiUrls.SUBSCRIBE + id;
 };
 
-export { ApiUrls, getTvShowApiUrl, getTvShowApiUrlByImdbId, getSubscribeUrl };
+const getSearchUrl = (q, chunk) => {
+    const params = [];
+    params.push(`?q=${q}`);
+    if (chunk) {
+        params.push(`chunk=${chunk}`)
+    }
+    return ApiUrls.SEARCH + params.join('&');
+};
+
+export { ApiUrls, getTvShowApiUrl, getTvShowApiUrlByImdbId, getSubscribeUrl, getSearchUrl };

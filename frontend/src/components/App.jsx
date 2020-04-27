@@ -1,12 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { MuiThemeProvider } from '@material-ui/core';
+import qs from 'qs';
 
 import layout from '../styles/layout.scss';
 
 import Header from './Header/Header';
 import { DataProvider } from './common/DataProvider/DataProvider';
-import { ApiUrls, getTvShowApiUrlByImdbId } from './common/DataProvider/urls';
+import { ApiUrls, getSearchUrl, getTvShowApiUrl } from './common/DataProvider/urls';
 import PrivateRoute from './common/PrivateRoute/PrivateRoute';
 import { RouterUrls } from './common/urls';
 import TvShow from './TvShow/TvShow';
@@ -16,6 +17,7 @@ import Login from './accounts/Login/Login';
 import Register from './accounts/Register/Register';
 import { AuthProvider } from '../context/auth/AuthContext';
 import { defaultTheme } from '../context/theme';
+import Search from './Search/Search';
 
 
 const App = () => {
@@ -38,7 +40,7 @@ const App = () => {
                             <Route
                                 path={RouterUrls.TV_SHOW}
                                 render={({match}) => {
-                                    const url = getTvShowApiUrlByImdbId(match.params.contentId);
+                                    const url = getTvShowApiUrl(match.params.contentId);
                                     return (
                                         <DataProvider
                                             key={url}
@@ -54,6 +56,21 @@ const App = () => {
                             <Route exact path={RouterUrls.REGISTER}>
                                 <Register />
                             </Route>
+                            <Route
+                                exact
+                                path={RouterUrls.SEARCH}
+                                render={({location}) => {
+                                    const {q} = qs.parse(location.search, {ignoreQueryPrefix: true});
+                                    const url = getSearchUrl(q);
+                                    return (
+                                        <DataProvider
+                                            key={url}
+                                            url={url}
+                                            render={data => <Search data={data} />}
+                                        />
+                                    );
+                                }}
+                            />
                             <Route path="*">
                                 <Page404 />
                             </Route>
