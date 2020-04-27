@@ -23,8 +23,8 @@ class ImdbManager(PolymorphicManager):
 
 class TvShow(Watchable):
     objects = ImdbManager()
-    seasons = models.PositiveSmallIntegerField()
-    years = models.CharField(max_length=9, default=None)
+    seasons = models.PositiveSmallIntegerField(blank=True, null=True)
+    years = models.CharField(max_length=9, default='', blank=True)
     is_airing = models.BooleanField(default=False)
 
     def __str__(self):
