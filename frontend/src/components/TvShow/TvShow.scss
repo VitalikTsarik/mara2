@@ -50,23 +50,7 @@
 }
 
 .info {
-    display: grid;
     margin-top: 20px;
-    grid-template-columns: 80px 1fr;
-    grid-row-gap: 15px;
-    grid-column-gap: 15px;
-}
-
-.infoName {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #03dac5;
-    justify-self: end;
-}
-
-.infoContent {
-    font-size: 1rem;
-    align-self: center;
 }
 
 .subBtn {

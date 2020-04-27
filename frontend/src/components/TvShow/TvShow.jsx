@@ -7,6 +7,7 @@ import SubButton from '../common/SubButton/SubButton';
 import Tooltip from '../common/Tooltip/Tooltip';
 import { subscribe } from '../../actions/subscriptions';
 import Placeholder from '../common/Placeholder/Placeholder';
+import Info from '../common/Info/Info';
 
 const TvShow = ({
                     data:
@@ -66,14 +67,14 @@ const TvShow = ({
                     </Tooltip>
                 </div>
                 <div className={styles.info}>
-                    <div className={styles.infoName}>seasons</div>
-                    <div className={styles.infoContent}>{seasons}</div>
-                    <div className={styles.infoName}>runtime</div>
-                    <div className={styles.infoContent}>{runtime}</div>
-                    <div className={styles.infoName}>genres</div>
-                    <div className={styles.infoContent}>{genres}</div>
-                    <div className={styles.infoName}>years</div>
-                    <div className={styles.infoContent}>{years}</div>
+                    <Info
+                        dataMap={{
+                            seasons: seasons,
+                            runtime: runtime,
+                            genres: genres,
+                            years: years,
+                        }}
+                    />
                 </div>
             </div>
         </div>
