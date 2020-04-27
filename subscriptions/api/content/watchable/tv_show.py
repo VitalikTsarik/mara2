@@ -1,5 +1,3 @@
-from django.contrib.auth.models import AnonymousUser
-from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.status import HTTP_404_NOT_FOUND
 from rest_framework.viewsets import ReadOnlyModelViewSet
@@ -20,7 +18,14 @@ class TvShowViewSet(ReadOnlyModelViewSet):
             return Response(status=HTTP_404_NOT_FOUND)
 
         serializer = self.serializer_class(tv_show)
-        return Response(serializer.data)
+        data = serializer.data
+
+        if request.user.is_anonymous:
+            data['isSubscribed'] = False
+        else:
+            data['isSubscribed'] = Subscription.objects.filter(user=request.user, content=tv_show).exists()
+
+        return Response(data)
 
 
 class TvShowImdbViewSet(ReadOnlyModelViewSet):
