@@ -2,4 +2,5 @@ from .watchable import Watchable
 
 
 class Movie(Watchable):
-    pass
+    def __str__(self):
+        return f'Movie {super().__str__()}'

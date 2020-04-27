@@ -28,5 +28,4 @@ class TvShow(Watchable):
     is_airing = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'Tv Show {self.title} {self.imdb_id} {self.content_id}'
-
+        return f'Tv Show {super().__str__()}'

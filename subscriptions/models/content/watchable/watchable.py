@@ -25,7 +25,7 @@ class Watchable(Subscribable):
     poster_url = models.URLField(blank=True, default='')
 
     def __str__(self):
-        return f'{self.imdb_id} {self.title}'
+        return f'{self.title} content_id={self.content_id} imdb_id={self.imdb_id}'
 
     class Meta:
         abstract = True
