@@ -18,5 +18,5 @@ class ImdbConnection:
             return imdb_movie_to_tv_show(imdb_movie)
         return None
 
-    def search_by_title(self, title):
-        return search_result(self.__connection.search_movie(title, results=5))
+    def search_by_title(self, title, results=20):
+        return search_result(self.__connection.search_movie(title, results=results))
