@@ -27,18 +27,23 @@ class SearchView(APIView):
         return Response(serializer.data)
 
     @staticmethod
-    def search(title, chunk):
+    def search(title, chunks):
         connection = ImdbConnection()
         connection.connect()
 
-        results = SEARCH_RESULTS * chunk
+        results = SEARCH_RESULTS * chunks
         last_results = 0
         while True:
             result = connection.search_by_title(title, results)
             results += SEARCH_RESULTS
-            if len(result) >= SEARCH_RESULTS * chunk or len(result) == last_results:
+
+            if len(result) >= SEARCH_RESULTS * chunks:
+                chunk = result[-SEARCH_RESULTS:]
+                break
+
+            if len(result) == last_results:
+                chunk = []
                 break
             last_results = len(result)
 
-        last_chunk = result[-SEARCH_RESULTS:]
-        return last_chunk
+        return chunk
