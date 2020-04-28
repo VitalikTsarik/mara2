@@ -2,13 +2,15 @@ import React from 'react';
 import ContentLoader from 'react-content-loader';
 import PropTypes from 'prop-types';
 
+import { backgroundColor, foregroundColor } from '../constants';
+
 const Placeholder = ({width, height, title}) => {
     return (
         <ContentLoader
             width={width}
             height={height}
-            backgroundColor={'#313236'}
-            foregroundColor={'#50535a'}
+            backgroundColor={backgroundColor}
+            foregroundColor={foregroundColor}
             title={title}
         >
             <rect

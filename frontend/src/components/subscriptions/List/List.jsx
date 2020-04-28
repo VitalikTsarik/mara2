@@ -3,7 +3,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import styles from './List.scss';
 
 import Item from '../Item/Item';
-import Placeholder from '../../common/Placeholder/Placeholder';
+import Placeholder from '../../skeletons/Placeholder/Placeholder';
 
 const itemHeight = 350;
 const itemWidth = 250;

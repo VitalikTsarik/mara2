@@ -6,7 +6,7 @@ import styles from './TvShow.scss';
 import SubButton from '../common/SubButton/SubButton';
 import Tooltip from '../common/Tooltip/Tooltip';
 import { subscribe } from '../../actions/subscriptions';
-import Placeholder from '../common/Placeholder/Placeholder';
+import Placeholder from '../skeletons/Placeholder/Placeholder';
 import Info from '../common/Info/Info';
 
 const TvShow = ({
