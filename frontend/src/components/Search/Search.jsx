@@ -11,7 +11,7 @@ import { getNextChunk } from '../../actions/search';
 const Search = ({data}) => {
     const [items, setItems] = useState(data);
     const [chunksLoaded, setChunksLoaded] = useState(1);
-    const [hasMore, setHasMore] = useState(true);
+    const [hasMore, setHasMore] = useState(Boolean(items.length));
 
     const location = useLocation();
     const searchQuery = useMemo(() => {
@@ -33,7 +33,7 @@ const Search = ({data}) => {
         <InfiniteScroll
             loadMore={handleLoadMore}
             hasMore={hasMore}
-            loader={<div>Loading ...</div>}
+            loader={<div key={'loading'}>Loading ...</div>}
         >
             <div className={styles.search}>
                 <Results items={items} />

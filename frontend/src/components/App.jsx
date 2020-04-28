@@ -18,6 +18,7 @@ import Register from './accounts/Register/Register';
 import { AuthProvider } from '../context/auth/AuthContext';
 import { defaultTheme } from '../context/theme';
 import Search from './Search/Search';
+import SearchSkeleton from './skeletons/SearchSkeleton/SearchSkeleton';
 
 
 const App = () => {
@@ -67,6 +68,7 @@ const App = () => {
                                             key={url}
                                             url={url}
                                             render={data => <Search data={data} />}
+                                            skeleton={<SearchSkeleton count={5} />}
                                         />
                                     );
                                 }}
