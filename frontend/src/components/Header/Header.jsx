@@ -1,19 +1,25 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import classNames from 'classnames';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 import styles from './Header.scss';
 import layout from '../../styles/layout.scss';
 
 import Logo from './logo.png';
 import SearchBar from './SearchBar/SearchBar';
-import { RouterUrls, getHomeUrl } from '../common/urls';
+import { RouterUrls, getHomeUrl, getSearchUrl } from '../common/urls';
 import { useAuth } from '../../context/auth/AuthContext';
 import AuthorizationButtons from './AuthorizationButtons/AuthorizationButtons';
 import UserStatus from './UserStatus/UserStatus';
 
 const Header = () => {
-    const {isAuthorized, user} = useAuth();
+    const {isAuthorized} = useAuth();
+
+    const history = useHistory();
+    const handleSearchSubmit = useCallback((value) => {
+        history.push(getSearchUrl(value));
+    }, []);
+
     return (
         <nav className={classNames(styles.header, layout.container)}>
             <div className={styles.header_items}>
@@ -37,7 +43,7 @@ const Header = () => {
                     )}
                 </div>
                 <div className={styles.header_searchBar}>
-                    <SearchBar onSubmit={(value) => console.log(value)} />
+                    <SearchBar onSubmit={handleSearchSubmit} />
                 </div>
             </div>
             {isAuthorized ? <UserStatus /> : <AuthorizationButtons />}

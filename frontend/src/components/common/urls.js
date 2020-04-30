@@ -15,4 +15,8 @@ const getHomeUrl = () => {
     return RouterUrls.HOME[0];
 };
 
-export { RouterUrls, getTitleUrl, getHomeUrl };
+const getSearchUrl = (q) => {
+    return RouterUrls.SEARCH + `?q=${q}`;
+};
+
+export { RouterUrls, getTitleUrl, getHomeUrl, getSearchUrl };
