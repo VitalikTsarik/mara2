@@ -3,9 +3,9 @@ from rest_framework.views import APIView
 
 from imdb_utils.db_fetch import ImdbConnection
 from subscriptions.models import Movie, Watchable
-from subscriptions.serializers import WatchableSearchSerializer
+from subscriptions.serializers import TitleSearchSerializer
 
-SEARCH_RESULTS = 5
+CHUNK_SIZE = 5
 
 
 class SearchView(APIView):
@@ -14,16 +14,16 @@ class SearchView(APIView):
         chunk = int(request.GET.get('chunk', 1))
 
         result = self.search(title, chunk)
-        watchables = []
+        titles = []
         for item in result:
             try:
-                watchable = Movie.manager.get(imdb_id=item.imdb_id)
+                watchable = Movie.titles.get(imdb_id=item.imdb_id)
             except Watchable.DoesNotExist:
                 item.save()
-                watchable = Movie.manager.get(imdb_id=item.imdb_id)
-            watchables.append(watchable)
+                watchable = Movie.titles.get(imdb_id=item.imdb_id)
+            titles.append(watchable)
 
-        serializer = WatchableSearchSerializer(watchables, many=True)
+        serializer = TitleSearchSerializer(titles, many=True)
         return Response(serializer.data)
 
     @staticmethod
@@ -31,14 +31,18 @@ class SearchView(APIView):
         connection = ImdbConnection()
         connection.connect()
 
-        results = SEARCH_RESULTS * chunks
+        results = CHUNK_SIZE * chunks
         last_results = 0
         while True:
             result = connection.search_by_title(title, results)
-            results += SEARCH_RESULTS
+            results += CHUNK_SIZE
 
-            if len(result) >= SEARCH_RESULTS * chunks:
-                chunk = result[-SEARCH_RESULTS:]
+            if len(result) > CHUNK_SIZE * chunks:
+                diff = len(result) - CHUNK_SIZE * chunks
+                chunk = result[-(CHUNK_SIZE + diff):-diff]
+                break
+            elif len(result) == CHUNK_SIZE * chunks:
+                chunk = result[-CHUNK_SIZE:]
                 break
 
             if len(result) == last_results:

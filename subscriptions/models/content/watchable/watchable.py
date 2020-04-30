@@ -4,7 +4,7 @@ from polymorphic.managers import PolymorphicQuerySet
 from ..subscribable import Subscribable
 
 
-class WatchableQuerySet(PolymorphicQuerySet):
+class TitlesQuerySet(PolymorphicQuerySet):
     def get(self, *args, **kwargs):
         for cls in Watchable.__subclasses__():
             try:
@@ -15,7 +15,7 @@ class WatchableQuerySet(PolymorphicQuerySet):
 
 
 class Watchable(Subscribable):
-    manager = WatchableQuerySet.as_manager()
+    titles = TitlesQuerySet.as_manager()
     imdb_id = models.PositiveIntegerField(default=0, unique=True)
     title = models.CharField(max_length=100)
     runtime = models.DurationField(blank=True, null=True)

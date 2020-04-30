@@ -5,21 +5,20 @@ import { useHistory } from 'react-router-dom';
 import styles from './Item.scss';
 
 import Info from '../../common/Info/Info';
-import { getTvShowUrl } from '../../common/urls';
+import { getTitleUrl } from '../../common/urls';
 import Placeholder from '../../skeletons/Placeholder/Placeholder';
 
 const Item = ({item}) => {
     const history = useHistory();
 
     const handleClick = useCallback(() => {
-        history.push(getTvShowUrl(item.content_id));
+        history.push(getTitleUrl(item.content_id));
     }, [item.content_id]);
 
     const [isLoaded, setIsLoaded] = useState(false);
     const onLoad = useCallback(() => {
         setIsLoaded(true);
     }, []);
-
 
     return (
         <div
@@ -47,8 +46,9 @@ const Item = ({item}) => {
                 <div className={styles.item_info}>
                     <Info
                         dataMap={{
+                            runtime: item.runtime,
                             seasons: item.seasons,
-                            year: item.year,
+                            genres: item.genres,
                         }}
                     />
                 </div>
@@ -62,8 +62,8 @@ Item.propTypes = {
         content_id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
         seasons: PropTypes.number,
-        poster_url: PropTypes.string,
-        year: PropTypes.string,
+        poster_url: PropTypes.string.isRequired,
+        genres: PropTypes.string.isRequired,
     }).isRequired
 };
 

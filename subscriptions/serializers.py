@@ -20,6 +20,33 @@ class TvShowDetailSerializer(ModelSerializer):
         )
 
 
+class MovieDetailSerializer(ModelSerializer):
+    class Meta:
+        model = Movie
+        fields = (
+            'content_id',
+            'title',
+            'poster_url',
+            'runtime',
+            'genres',
+            'year',
+        )
+
+
+class TitleDetailSerializer(ModelSerializer):
+    def to_representation(self, instance):
+        instance_class = instance.get_real_instance_class()
+        if instance_class == Movie:
+            return MovieDetailSerializer(instance=instance).data
+        elif instance_class == TvShow:
+            return TvShowDetailSerializer(instance=instance).data
+        else:
+            raise ObjectDoesNotExist(f'There is no fitting a serializer for instance of {instance_class} ')
+
+    class Meta:
+        model = None
+
+
 class TvShowPreviewSerializer(ModelSerializer):
     class Meta:
         model = TvShow
@@ -29,6 +56,30 @@ class TvShowPreviewSerializer(ModelSerializer):
             'poster_url',
             'is_airing',
         )
+
+
+class MoviePreviewSerializer(ModelSerializer):
+    class Meta:
+        model = Movie
+        fields = (
+            'content_id',
+            'title',
+            'poster_url',
+        )
+
+
+class TitlePreviewSerializer(ModelSerializer):
+    def to_representation(self, instance):
+        instance_class = instance.get_real_instance_class()
+        if instance_class == Movie:
+            return MoviePreviewSerializer(instance=instance).data
+        elif instance_class == TvShow:
+            return TvShowPreviewSerializer(instance=instance).data
+        else:
+            raise ObjectDoesNotExist(f'There is no fitting a serializer for instance of {instance_class} ')
+
+    class Meta:
+        model = None
 
 
 class SubscriptionsSerializer(ModelSerializer):
@@ -49,7 +100,8 @@ class TvShowSearchSerializer(ModelSerializer):
             'title',
             'seasons',
             'poster_url',
-            'year',
+            'runtime',
+            'genres',
         )
 
 
@@ -60,11 +112,12 @@ class MovieSearchSerializer(ModelSerializer):
             'content_id',
             'title',
             'poster_url',
-            'year',
+            'runtime',
+            'genres',
         )
 
 
-class WatchableSearchSerializer(ModelSerializer):
+class TitleSearchSerializer(ModelSerializer):
     def to_representation(self, instance):
         instance_class = instance.get_real_instance_class()
         if instance_class == Movie:

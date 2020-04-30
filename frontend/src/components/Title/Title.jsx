@@ -1,29 +1,28 @@
 import React, { useCallback, useState } from 'react';
 import classNames from 'classnames';
 
-import styles from './TvShow.scss';
+import styles from './Title.scss';
 
 import SubButton from '../common/SubButton/SubButton';
 import Tooltip from '../common/Tooltip/Tooltip';
-import { subscribe } from '../../actions/subscriptions';
 import Placeholder from '../skeletons/Placeholder/Placeholder';
 import Info from '../common/Info/Info';
 
-const TvShow = ({
-                    data:
-                        {
-                            content_id,
-                            title,
-                            poster_url,
-                            seasons,
-                            runtime,
-                            genres,
-                            year,
-                            years,
-                            isAiring,
-                            isSubscribed,
-                        }
-                }) => {
+const Title = ({
+                   data:
+                       {
+                           content_id,
+                           title,
+                           poster_url,
+                           seasons,
+                           runtime,
+                           genres,
+                           year,
+                           years,
+                           is_airing,
+                           is_subscribed,
+                       }
+               }) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const onLoad = useCallback(() => {
         setIsLoaded(true);
@@ -49,22 +48,22 @@ const TvShow = ({
                 <div className={styles.subBtn}>
                     <SubButton
                         contentId={content_id}
-                        isSub={isSubscribed}
+                        isSub={is_subscribed}
                     />
                 </div>
             </div>
             <div className={styles.overview}>
                 <div className={styles.title}>
                     {title} ({year})
-                    <Tooltip
-                        content={'Airing Status'}
-                    >
-                        <div className={classNames(
-                            styles.circle,
-                            isAiring && styles.circle__active,
-                        )}
-                        />
-                    </Tooltip>
+                    {is_airing !== undefined && (
+                        <Tooltip content={'Airing Status'}>
+                            <div className={classNames(
+                                styles.circle,
+                                is_airing && styles.circle__active,
+                            )}
+                            />
+                        </Tooltip>
+                    )}
                 </div>
                 <div className={styles.info}>
                     <Info
@@ -81,4 +80,4 @@ const TvShow = ({
     );
 };
 
-export default TvShow;
+export default Title;

@@ -1,7 +1,6 @@
 const ApiUrls = Object.freeze({
     SUBSCRIPTIONS: '/api/subscriptions/',
-    TV_SHOW: '/api/tv_show/:id/',
-    TV_SHOW_IMDB: '/api/tv_show/imdb/:id/',
+    TITLE: '/api/title/:id/',
     SUBSCRIBE: '/api/subscribe/',
     LOGIN: '/api/login/',
     LOGOUT: '/api/logout/',
@@ -10,12 +9,8 @@ const ApiUrls = Object.freeze({
     SEARCH: '/api/search',
 });
 
-const getTvShowApiUrl = (contenId) => {
-    return ApiUrls.TV_SHOW.replace(':id', contenId);
-};
-
-const getTvShowApiUrlByImdbId = (imdbId) => {
-    return ApiUrls.TV_SHOW_IMDB.replace(':id', imdbId);
+const getTitleApiUrl = (contenId) => {
+    return ApiUrls.TITLE.replace(':id', contenId);
 };
 
 const getSubscribeUrl = (id) => {
@@ -31,4 +26,4 @@ const getSearchUrl = (q, chunk) => {
     return ApiUrls.SEARCH + params.join('&');
 };
 
-export { ApiUrls, getTvShowApiUrl, getTvShowApiUrlByImdbId, getSubscribeUrl, getSearchUrl };
+export { ApiUrls, getTitleApiUrl, getSubscribeUrl, getSearchUrl };

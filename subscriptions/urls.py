@@ -1,11 +1,10 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from .api import TvShowViewSet, TvShowImdbViewSet, SubscriptionsViewSet, SearchView, SubscribeView
+from .api import TitleViewSet, SubscriptionsViewSet, SearchView, SubscribeView
 
 router = DefaultRouter()
-router.register('tv_show/imdb', TvShowImdbViewSet)
-router.register('tv_show', TvShowViewSet)
+router.register('title', TitleViewSet)
 router.register('subscriptions', SubscriptionsViewSet)
 
 urlpatterns = [

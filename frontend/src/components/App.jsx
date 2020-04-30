@@ -7,10 +7,10 @@ import layout from '../styles/layout.scss';
 
 import Header from './Header/Header';
 import { DataProvider } from './common/DataProvider/DataProvider';
-import { ApiUrls, getSearchUrl, getTvShowApiUrl } from './common/DataProvider/urls';
+import { ApiUrls, getSearchUrl, getTitleApiUrl } from './common/DataProvider/urls';
 import PrivateRoute from './common/PrivateRoute/PrivateRoute';
 import { RouterUrls } from './common/urls';
-import TvShow from './TvShow/TvShow';
+import Title from './Title/Title';
 import List from './subscriptions/List/List';
 import Page404 from './Page404/Page404';
 import Login from './accounts/Login/Login';
@@ -39,14 +39,14 @@ const App = () => {
                             <Route exact path={RouterUrls.HOME}>
                             </Route>
                             <Route
-                                path={RouterUrls.TV_SHOW}
+                                path={RouterUrls.TITLE}
                                 render={({match}) => {
-                                    const url = getTvShowApiUrl(match.params.contentId);
+                                    const url = getTitleApiUrl(match.params.contentId);
                                     return (
                                         <DataProvider
                                             key={url}
                                             url={url}
-                                            render={data => <TvShow data={data} />}
+                                            render={data => <Title data={data} />}
                                         />
                                     );
                                 }}

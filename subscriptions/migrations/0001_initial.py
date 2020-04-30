@@ -45,7 +45,7 @@ class Migration(migrations.Migration):
             bases=('subscriptions.subscribable',),
         ),
         migrations.CreateModel(
-            name='TvShow',
+            name='Title',
             fields=[
                 ('subscribable_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='subscriptions.Subscribable')),
                 ('imdb_id', models.PositiveIntegerField(default=0, unique=True)),
