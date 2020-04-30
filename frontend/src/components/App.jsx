@@ -41,7 +41,7 @@ const App = () => {
                             <Route
                                 path={RouterUrls.TITLE}
                                 render={({match}) => {
-                                    const url = getTitleApiUrl(match.params.contentId);
+                                    const url = getTitleApiUrl(match.params.id);
                                     return (
                                         <DataProvider
                                             key={url}

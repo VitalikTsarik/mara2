@@ -9,6 +9,7 @@ $overlay-color: rgb(0, 10, 30);
     position: relative;
     overflow: hidden;
     transition: all 0.4s;
+    cursor: pointer;
 
     &:hover {
         box-shadow: 0 18px 20px -9px rgba(0, 10, 30, 0.75);
@@ -62,6 +63,7 @@ $overlay-color: rgb(0, 10, 30);
 .title {
     font-size: 30px;
     text-align: center;
+    cursor: text;
 
     &:after {
         display: block;

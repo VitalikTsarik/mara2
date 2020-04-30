@@ -1,14 +1,14 @@
 const RouterUrls = Object.freeze({
     HOME: ['/home', '/'],
     SUBSCRIPTIONS: '/list',
-    TITLE: '/title/:contentId',
+    TITLE: '/title/:id',
     LOGIN: '/login',
     REGISTER: '/register',
     SEARCH: '/search',
 });
 
-const getTitleUrl = (contenId) => {
-    return RouterUrls.TITLE.replace(':contentId', contenId);
+const getTitleUrl = (id) => {
+    return RouterUrls.TITLE.replace(':id', id);
 };
 
 const getHomeUrl = () => {

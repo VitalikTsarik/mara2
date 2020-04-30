@@ -10,7 +10,8 @@ const SubButton = ({contentId, onSubCallback, isSub: initialIsSub}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState(null);
 
-    const handleClick = useCallback(async () => {
+    const handleClick = useCallback(async (e) => {
+        e.stopPropagation();
         if (isLoading) {
             return;
         }

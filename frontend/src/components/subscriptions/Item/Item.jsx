@@ -1,19 +1,29 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
 import styles from './Item.scss';
 
 import SubButton from '../../common/SubButton/SubButton';
+import { getTitleUrl } from '../../common/urls';
 
-const Item = ({item: {content_id, title, poster_url}, onUnsub, skeleton}) => {
+const Item = ({item: {content_id, title, poster_url}, skeleton}) => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     const onLoad = useCallback(() => {
         setIsLoaded(true);
     }, []);
 
+    const history = useHistory();
+    const handleClick = useCallback(() => {
+        history.push(getTitleUrl(content_id));
+    }, [history]);
+
     return (
-        <div className={styles.item}>
+        <div
+            className={styles.item}
+            onClick={handleClick}
+        >
             {!isLoaded && skeleton}
             <img
                 style={isLoaded ? {} : {display: 'none'}}
@@ -31,7 +41,6 @@ const Item = ({item: {content_id, title, poster_url}, onUnsub, skeleton}) => {
                     <SubButton
                         contentId={content_id}
                         isSub={true}
-                        // onSubCallback={onUnsub}
                     />
                 </div>
             </div>
@@ -41,7 +50,6 @@ const Item = ({item: {content_id, title, poster_url}, onUnsub, skeleton}) => {
 
 Item.propTypes = {
     item: PropTypes.object.isRequired,
-    onUnsub: PropTypes.func.isRequired,
 };
 
 export default Item;

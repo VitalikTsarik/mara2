@@ -25,16 +25,25 @@ $spin-duration: 2.5s;
         background: map_get($colors, 'primary');
         appearance: none;
 
+        filter: brightness(.8);
+
+        &:hover {
+            filter: brightness(1);
+        }
+
+
         &:focus {
             outline: 0;
+            filter: brightness(1);
         }
 
         &.animate {
             width: $button-width/4;
             min-width: 0;
             height: $button-width/4;
-            border-radius: 50%;
             cursor: default;
+            border-radius: 50%;
+            filter: brightness(1);
 
             &:after {
                 position: absolute;
