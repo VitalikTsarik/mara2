@@ -46,7 +46,7 @@ class SearchView(APIView):
                 break
 
             if len(result) == last_results:
-                chunk = []
+                chunk = result if chunks == 1 else []
                 break
             last_results = len(result)
 
