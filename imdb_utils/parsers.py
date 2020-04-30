@@ -1,14 +1,7 @@
-from subscriptions.models import TvShow, Movie
 from datetime import timedelta
 
-mapKindToType = {
-    'tv series': TvShow,
-    'tv mini series': TvShow,
-    'movie': Movie,
-    'tv movie': Movie,
-    'short': Movie,
-}
-# ‘movie’, ‘tv series’, ‘tv mini series’, ‘video game’, ‘video movie’, ‘tv movie’, ‘episode’
+from imdb_utils.constants import WatchableTypes
+from subscriptions.models import TvShow, Movie
 
 
 def _set_watchable_props(watchable, imdb_movie):
@@ -30,17 +23,21 @@ def imdb_movie_to_tv_show(imdb_movie):
     tv_show = TvShow()
     _set_watchable_props(tv_show, imdb_movie)
     tv_show.seasons = imdb_movie.get('number of seasons')
-    tv_show.years = imdb_movie.get('series years')
+    tv_show.years = imdb_movie.get('series years', '')
     return tv_show
 
 
-def search_result(result):
-    movies = []
-    for imdb_movie in result:
-        kind = imdb_movie.get('kind')
-        watchable_type = mapKindToType.get(kind)
-        if watchable_type:
-            watchable = watchable_type()
-            _set_watchable_props(watchable, imdb_movie)
-            movies.append(watchable)
-    return movies
+def imdb_movie_to_movie(imdb_movie):
+    movie = Movie()
+    _set_watchable_props(movie, imdb_movie)
+    return movie
+
+
+def imdb_movie_to_title(imdb_movie):
+    kind = imdb_movie.get('kind')
+    if kind in WatchableTypes.tv_show_types():
+        return imdb_movie_to_tv_show(imdb_movie)
+    elif kind in WatchableTypes.movie_types():
+        return imdb_movie_to_movie(imdb_movie)
+    else:
+        return None
