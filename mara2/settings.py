@@ -1,16 +1,23 @@
 import os
 from datetime import timedelta
 
-from decouple import config, Csv
 from django.conf import settings
+import environ
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = config('SECRET_KEY')
+env = environ.Env(
+    DEBUG=(bool, False),
+    ALLOWED_HOSTS=(list, ['localhost']),
+)
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
-DEBUG = config('DEBUG', cast=bool)
+SECRET_KEY = env('SECRET_KEY')
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+DEBUG = env('DEBUG')
+
+ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
 INSTALLED_APPS = [
     'django.contrib.admin',

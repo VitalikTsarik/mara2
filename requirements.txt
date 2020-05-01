@@ -5,4 +5,4 @@ IMDbPY==6.8
 huey==2.2.0
 redis==3.5.0
 django-polymorphic==2.1.2
-python-decouple==3.3
+django-environ==0.4.5
