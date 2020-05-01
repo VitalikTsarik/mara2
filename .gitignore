@@ -8,7 +8,6 @@ __pycache__/
 *.pot
 
 # Django stuff:
-*.log
 local_settings.py
 db.sqlite3
 
@@ -23,3 +22,6 @@ venv/
 node_modules/
 frontend/static/frontend/
 /static/
+
+# logs
+*.log

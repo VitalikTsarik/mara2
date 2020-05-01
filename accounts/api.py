@@ -3,6 +3,7 @@ from django.contrib.auth import login
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
+from subscriptions.tasks import schedule_subscriptions_check
 from .serializers import UserSerializer, RegisterSerializer, LoginSerializer
 
 
@@ -14,6 +15,8 @@ class RegisterView(KnoxLoginView):
         serializer = RegisterSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+
+        schedule_subscriptions_check(user.id)
 
         login(request, user)
 

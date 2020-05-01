@@ -2,5 +2,7 @@ django==3.0.3
 djangorestframework==3.11.0
 django-rest-knox==4.1.0
 IMDbPY==6.8
+huey==2.2.0
+redis==3.5.0
 django-polymorphic==2.1.2
 python-decouple==3.3

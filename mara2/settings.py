@@ -2,6 +2,7 @@ import os
 from datetime import timedelta
 
 from decouple import config, Csv
+from django.conf import settings
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -24,6 +25,7 @@ INSTALLED_APPS = [
     'frontend',
     'knox',
     'accounts',
+    'huey.contrib.djhuey',
 ]
 
 if DEBUG:
@@ -124,6 +126,12 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-LOGIN_URL = 'login'
-
-LOGIN_REDIRECT_URL = 'home'
+HUEY = {
+    'name': 'huey-subscriptions',
+    'immediate': False,
+    'consumer': {
+        'logfile': os.path.join(BASE_DIR, 'logs/huey.log'),
+        'workers': 4,
+        'worker_type': 'thread'
+    },
+}
