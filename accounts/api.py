@@ -16,7 +16,7 @@ class RegisterView(KnoxLoginView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
 
-        schedule_subscriptions_check(user.id)
+        schedule_subscriptions_check(user)
 
         login(request, user)
 

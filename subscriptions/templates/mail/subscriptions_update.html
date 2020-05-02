@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .main {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            font-family: Raleway, Trebuchet MS, Helvetica, sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .from {
+            color: #6a6a6a;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .site-url {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .update {
+            padding: 10px;
+            font-size: 42px;
+        }
+
+        .title {
+            font-size: 34px;
+            font-weight: bold;
+            text-align: center;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+
+        .items {
+            background-color: #eff0f1;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            align-items: center;
+            padding: 30px 0;
+        }
+
+        .item {
+            margin-bottom: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center
+        }
+
+        .image {
+            width: 400px;
+            height: 500px;
+        }
+    </style>
+</head>
+<div class="main">
+    <div class="from">from <a class="site-url">mara.com</a></div>
+    <p>Hey, {{ username }}!</p>
+    <p style="text-align: center"> <span class="update">Your Subscriptions Update</span></p>
+    <div class="items">
+        {% for item in items %}
+            <a href="localhost:8000/title/{{ item.content_id }}">
+                <div class="item">
+                    <div class="title">{{ item.title }}</div>
+                    <img class="image" src="{{ item.poster_url }}">
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+</div>
+</html>
