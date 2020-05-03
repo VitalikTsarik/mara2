@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from django.core.exceptions import ObjectDoesNotExist
+from rest_polymorphic.serializers import PolymorphicSerializer
 
 from .models import TvShow, Subscription, Movie
 
@@ -33,18 +33,11 @@ class MovieDetailSerializer(ModelSerializer):
         )
 
 
-class TitleDetailSerializer(ModelSerializer):
-    def to_representation(self, instance):
-        instance_class = instance.get_real_instance_class()
-        if instance_class == Movie:
-            return MovieDetailSerializer(instance=instance).data
-        elif instance_class == TvShow:
-            return TvShowDetailSerializer(instance=instance).data
-        else:
-            raise ObjectDoesNotExist(f'There is no fitting a serializer for instance of {instance_class} ')
-
-    class Meta:
-        model = None
+class TitleDetailSerializer(PolymorphicSerializer):
+    model_serializer_mapping = {
+        Movie: MovieDetailSerializer,
+        TvShow: TvShowDetailSerializer,
+    }
 
 
 class TvShowPreviewSerializer(ModelSerializer):
@@ -68,18 +61,11 @@ class MoviePreviewSerializer(ModelSerializer):
         )
 
 
-class TitlePreviewSerializer(ModelSerializer):
-    def to_representation(self, instance):
-        instance_class = instance.get_real_instance_class()
-        if instance_class == Movie:
-            return MoviePreviewSerializer(instance=instance).data
-        elif instance_class == TvShow:
-            return TvShowPreviewSerializer(instance=instance).data
-        else:
-            raise ObjectDoesNotExist(f'There is no fitting a serializer for instance of {instance_class} ')
-
-    class Meta:
-        model = None
+class TitlePreviewSerializer(PolymorphicSerializer):
+    model_serializer_mapping = {
+        Movie: MoviePreviewSerializer,
+        TvShow: TvShowPreviewSerializer,
+    }
 
 
 class SubscriptionsSerializer(ModelSerializer):
@@ -117,15 +103,8 @@ class MovieSearchSerializer(ModelSerializer):
         )
 
 
-class TitleSearchSerializer(ModelSerializer):
-    def to_representation(self, instance):
-        instance_class = instance.get_real_instance_class()
-        if instance_class == Movie:
-            return MovieSearchSerializer(instance=instance).data
-        elif instance_class == TvShow:
-            return TvShowSearchSerializer(instance=instance).data
-        else:
-            raise ObjectDoesNotExist(f'There is no fitting a serializer for instance of {instance_class} ')
-
-    class Meta:
-        model = None
+class TitleSearchSerializer(PolymorphicSerializer):
+    model_serializer_mapping = {
+        Movie: MovieSearchSerializer,
+        TvShow: TvShowSearchSerializer,
+    }
