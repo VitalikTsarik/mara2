@@ -28,7 +28,6 @@ class SubscriptionsViewSet(ModelViewSet):
 
 
 class SubscribeView(APIView):
-    queryset = Subscription.objects.all()
     permission_classes = [IsAuthenticated]
 
     def post(self, request, content_id=None, *args, **kwargs):

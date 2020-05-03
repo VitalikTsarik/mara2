@@ -47,7 +47,6 @@ class TvShowPreviewSerializer(ModelSerializer):
             'content_id',
             'title',
             'poster_url',
-            'is_airing',
         )
 
 
@@ -73,6 +72,17 @@ class SubscriptionsSerializer(ModelSerializer):
         model = Subscription
         fields = (
             'user',
+            'content',
+            'subscription_date'
+        )
+
+
+class RecentSubscriptionsSerializer(ModelSerializer):
+    content = TitlePreviewSerializer()
+
+    class Meta:
+        model = Subscription
+        fields = (
             'content',
             'subscription_date'
         )
