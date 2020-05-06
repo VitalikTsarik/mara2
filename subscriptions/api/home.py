@@ -4,7 +4,6 @@ from subscriptions.models import Subscription
 from subscriptions.serializers import ListSubscriptionsSerializer
 
 RECENT_SUBSCRIPTIONS_COUNT = 10
-TOP_COUNT = 20
 
 
 class HomeView(APIView):

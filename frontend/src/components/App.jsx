@@ -9,7 +9,7 @@ import Header from './Header/Header';
 import { DataProvider } from './common/DataProvider/DataProvider';
 import { ApiUrls, getSearchUrl, getTitleApiUrl } from './common/DataProvider/urls';
 import PrivateRoute from './common/PrivateRoute/PrivateRoute';
-import { RouterUrls } from './common/urls';
+import { getHomeUrl, RouterUrls } from './common/urls';
 import Title from './Title/Title';
 import List from './subscriptions/List/List';
 import Page404 from './Page404/Page404';
@@ -19,6 +19,7 @@ import { AuthProvider } from '../context/auth/AuthContext';
 import { defaultTheme } from '../context/theme';
 import Search from './Search/Search';
 import SearchSkeleton from './skeletons/SearchSkeleton/SearchSkeleton';
+import Home from './Home/Home';
 
 
 const App = () => {
@@ -37,6 +38,11 @@ const App = () => {
                                 />)}
                             />
                             <Route exact path={RouterUrls.HOME}>
+                                <DataProvider
+                                    key={getHomeUrl()}
+                                    url={ApiUrls.HOME}
+                                    render={(data) => <Home data={data} />}
+                                />
                             </Route>
                             <Route
                                 path={RouterUrls.TITLE}
@@ -46,7 +52,7 @@ const App = () => {
                                         <DataProvider
                                             key={url}
                                             url={url}
-                                            render={data => <Title data={data} />}
+                                            render={(data) => <Title data={data} />}
                                         />
                                     );
                                 }}

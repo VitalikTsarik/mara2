@@ -11,5 +11,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('subscribe/<int:content_id>', SubscribeView.as_view()),
     path('search', SearchView.as_view()),
-    path('recent_subscriptions', HomeView.as_view())
+    path('home', HomeView.as_view())
 ]

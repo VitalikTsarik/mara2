@@ -7,6 +7,7 @@ const ApiUrls = Object.freeze({
     REGISTER: '/api/register/',
     USER: '/api/user/',
     SEARCH: '/api/search',
+    HOME: '/api/home',
 });
 
 const getTitleApiUrl = (contenId) => {
