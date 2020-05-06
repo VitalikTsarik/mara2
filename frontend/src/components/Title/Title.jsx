@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import styles from './Title.scss';
 
-import SubButton from '../common/SubButton/SubButton';
+import { SubButton } from '../common/SubButton/SubButton';
 import Tooltip from '../common/Tooltip/Tooltip';
 import Placeholder from '../skeletons/Placeholder/Placeholder';
 import Info from '../common/Info/Info';

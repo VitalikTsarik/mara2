@@ -1,8 +1,10 @@
 @import '../../../styles/variables';
 @import '../../../styles/colors';
 
-$button-width: 100px;
-$spinner-width: $button-width/6;
+$button-size-m: 100px;
+$spinner-size-m: $button-size-m/6;
+$button-size-s: 40px;
+$spinner-size-s: $button-size-m/6;
 $spin-duration: 2.5s;
 
 .subButton {
@@ -11,21 +13,30 @@ $spin-duration: 2.5s;
     width: 100%;
 
     &_button {
-        font-size: 1.2em;
         position: relative;
         display: inline-block;
-        min-width: $button-width;
         padding: 1em;
         cursor: pointer;
         user-select: none;
         text-align: center;
         color: map_get($colors, 'dark-dp6');
         border: 0;
-        border-radius: 25px;
         background: map_get($colors, 'primary');
         appearance: none;
 
         filter: brightness(.8);
+
+        &__small {
+            font-size: 16px;
+            min-width: $button-size-s;
+            border-radius: 20px;
+        }
+
+        &__medium {
+            font-size: 20px;
+            min-width: $button-size-m;
+            border-radius: 25px;
+        }
 
         &:hover {
             filter: brightness(1);
@@ -38,9 +49,9 @@ $spin-duration: 2.5s;
         }
 
         &.animate {
-            width: $button-width/4;
+            width: $button-size-m/4;
             min-width: 0;
-            height: $button-width/4;
+            height: $button-size-m/4;
             cursor: default;
             border-radius: 50%;
             filter: brightness(1);
@@ -49,8 +60,6 @@ $spin-duration: 2.5s;
                 position: absolute;
                 top: 50%;
                 left: 50%;
-                width: $spinner-width;
-                height: $spinner-width;
                 content: '';
                 transform: translate(-50%, -50%);
                 animation: spin ease-in $spin-duration forwards;
@@ -59,19 +68,39 @@ $spin-duration: 2.5s;
                 border-radius: 50%;
             }
 
-            &.success:before {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                width: $spinner-width;
-                height: $spinner-width/2;
-                content: '';
-                transform: translate(-50%, -50%) rotate(0deg) scale(0);
-                animation: success ease-in 0.15s forwards;
-                animation-delay: $spin-duration;
-                border: 4px solid map_get($colors, 'dark-dp6');
-                border-top: 0;
-                border-right: 0;
+            &__small:after {
+                width: $spinner-size-s;
+                height: $spinner-size-s;
+            }
+
+            &__medium:after {
+                width: $spinner-size-m;
+                height: $spinner-size-m;
+            }
+
+            &.success {
+                &:before {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    content: '';
+                    transform: translate(-50%, -50%) rotate(0deg) scale(0);
+                    animation: success ease-in 0.15s forwards;
+                    animation-delay: $spin-duration;
+                    border: 4px solid map_get($colors, 'dark-dp6');
+                    border-top: 0;
+                    border-right: 0;
+                }
+
+                &__small:before {
+                    width: $spinner-size-s;
+                    height: $spinner-size-s/2;
+                }
+
+                &__medium:before {
+                    width: $spinner-size-m;
+                    height: $spinner-size-m/2;
+                }
             }
 
             &.error {

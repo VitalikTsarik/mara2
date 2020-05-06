@@ -9,7 +9,17 @@ import { subscribe } from '../../../actions/subscriptions';
 import { useAuth } from '../../../context/auth/AuthContext';
 import { RouterUrls } from '../urls';
 
-const SubButton = ({contentId, onSubCallback, isSub: initialIsSub}) => {
+const SubButtonSize = Object.freeze({
+    MEDIUM: 'medium',
+    SMALL: 'small',
+});
+
+const SubButton = ({
+                       contentId,
+                       onSubCallback,
+                       isSub: initialIsSub,
+                       size = SubButtonSize.MEDIUM,
+                   }) => {
     const {isAuthorized} = useAuth();
     const history = useHistory();
 
@@ -45,8 +55,9 @@ const SubButton = ({contentId, onSubCallback, isSub: initialIsSub}) => {
             <div
                 className={classNames(
                     styles.subButton_button,
-                    isLoading && styles.animate,
-                    isSuccess ? styles.success : styles.error,
+                    styles[`subButton_button__${size}`],
+                    isLoading && [styles.animate, styles[`animate__${size}`]],
+                    isSuccess ? [styles.success, styles[`success__${size}`]] : styles.error,
                 )}
                 onClick={handleClick}
             >
@@ -60,6 +71,7 @@ SubButton.propTypes = {
     contentId: PropTypes.number.isRequired,
     onSubCallback: PropTypes.func,
     isSub: PropTypes.bool.isRequired,
+    size: PropTypes.oneOf(Object.values(SubButtonSize)),
 };
 
-export default SubButton;
+export { SubButton, SubButtonSize };

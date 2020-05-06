@@ -4,10 +4,14 @@ import { useHistory } from 'react-router-dom';
 
 import styles from './Item.scss';
 
-import SubButton from '../../common/SubButton/SubButton';
+import { SubButton, SubButtonSize } from '../../common/SubButton/SubButton';
 import { getTitleUrl } from '../../common/urls';
+import Placeholder from '../../skeletons/Placeholder/Placeholder';
 
-const Item = ({item: {content_id, title, poster_url}, skeleton}) => {
+const itemHeight = 350;
+const itemWidth = 250;
+
+const Item = ({item: {content_id, title, poster_url, is_subscribed}}) => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     const onLoad = useCallback(() => {
@@ -24,7 +28,12 @@ const Item = ({item: {content_id, title, poster_url}, skeleton}) => {
             className={styles.item}
             onClick={handleClick}
         >
-            {!isLoaded && skeleton}
+            {!isLoaded && (
+                <Placeholder
+                    width={itemWidth}
+                    height={itemHeight}
+                />
+            )}
             <img
                 style={isLoaded ? {} : {display: 'none'}}
                 className={styles.bgPoster}
@@ -40,7 +49,8 @@ const Item = ({item: {content_id, title, poster_url}, skeleton}) => {
                 <div className={styles.subBtn}>
                     <SubButton
                         contentId={content_id}
-                        isSub={true}
+                        isSub={is_subscribed}
+                        size={SubButtonSize.SMALL}
                     />
                 </div>
             </div>
