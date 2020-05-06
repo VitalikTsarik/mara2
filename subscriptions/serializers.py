@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, DateTimeField
 from rest_polymorphic.serializers import PolymorphicSerializer
 
 from .models import TvShow, Subscription, Movie
@@ -40,7 +40,7 @@ class TitleDetailSerializer(PolymorphicSerializer):
     }
 
 
-class TvShowPreviewSerializer(ModelSerializer):
+class TvShowSerializer(ModelSerializer):
     class Meta:
         model = TvShow
         fields = (
@@ -50,13 +50,40 @@ class TvShowPreviewSerializer(ModelSerializer):
         )
 
 
-class MoviePreviewSerializer(ModelSerializer):
+class MovieSerializer(ModelSerializer):
     class Meta:
         model = Movie
         fields = (
             'content_id',
             'title',
             'poster_url',
+        )
+
+
+class TitleSerializer(PolymorphicSerializer):
+    model_serializer_mapping = {
+        Movie: MovieSerializer,
+        TvShow: TvShowSerializer,
+    }
+
+
+class TvShowPreviewSerializer(ModelSerializer):
+    class Meta:
+        model = TvShow
+        fields = (
+            'content_id',
+            'title',
+            'preview_poster_url',
+        )
+
+
+class MoviePreviewSerializer(ModelSerializer):
+    class Meta:
+        model = Movie
+        fields = (
+            'content_id',
+            'title',
+            'preview_poster_url',
         )
 
 
@@ -77,8 +104,9 @@ class SubscriptionsSerializer(ModelSerializer):
         )
 
 
-class RecentSubscriptionsSerializer(ModelSerializer):
+class ListSubscriptionsSerializer(ModelSerializer):
     content = TitlePreviewSerializer()
+    subscription_date = DateTimeField(format="%H:%M %d-%b-%y", required=False, read_only=True)
 
     class Meta:
         model = Subscription

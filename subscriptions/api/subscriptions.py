@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.status import HTTP_200_OK
 
 from subscriptions.models import Subscription, Movie
-from subscriptions.serializers import SubscriptionsSerializer, TitlePreviewSerializer
+from subscriptions.serializers import SubscriptionsSerializer, TitleSerializer
 
 
 class SubscriptionsViewSet(ModelViewSet):
@@ -23,7 +23,7 @@ class SubscriptionsViewSet(ModelViewSet):
         for sub in subscriptions:
             titles.append(Movie.titles.get(imdb_id=sub.content.imdb_id))
 
-        serializer = TitlePreviewSerializer(titles, many=True)
+        serializer = TitleSerializer(titles, many=True)
         return Response(serializer.data)
 
 
