@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import RecentSubscriptions from './RecentSubscriptions/RecentSubscriptions';
 
 const Home = ({data}) => {
+    const {subscriptions} = data;
     return (
         <div>
-            <RecentSubscriptions subscriptions={data.subscriptions} />
+            {Boolean(subscriptions.length) && <RecentSubscriptions subscriptions={subscriptions} />}
         </div>
     );
 };
