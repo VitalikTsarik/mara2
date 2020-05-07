@@ -16,7 +16,6 @@ class TvShowDetailSerializer(ModelSerializer):
             'genres',
             'year',
             'years',
-            'is_airing',
         )
 
 

@@ -28,71 +28,71 @@ digraph model_graph {
     <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
     Watchable
     </B></FONT></TD></TR>
-  
-  
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><B>subscribable_ptr</B></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><B>OneToOneField (content_id)</B></FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto">genres</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">CharField</FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto">imdb_id</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">PositiveIntegerField</FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto">poster_url</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">URLField</FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto">preview_poster_url</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">URLField</FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto">runtime</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">DurationField</FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto">title</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">CharField</FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto">year</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">CharField</FONT>
     </TD></TR>
-  
-  
+
+
     </TABLE>
     >]
 
@@ -102,23 +102,23 @@ digraph model_graph {
     <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
     Subscribable
     </B></FONT></TD></TR>
-  
-  
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><B>content_id</B></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><I><B>polymorphic_ctype</B></I></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><I><B>ForeignKey (id)</B></I></FONT>
     </TD></TR>
-  
-  
+
+
     </TABLE>
     >]
 
@@ -128,39 +128,39 @@ digraph model_graph {
     <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
     Subscription
     </B></FONT></TD></TR>
-  
-  
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><B>id</B></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><B>AutoField</B></FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><B>content</B></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><B>ForeignKey (content_id)</B></FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><B>user</B></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto">subscription_date</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">DateTimeField</FONT>
     </TD></TR>
-  
-  
+
+
     </TABLE>
     >]
 
@@ -170,95 +170,85 @@ digraph model_graph {
     <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
     TvShow
     </B></FONT></TD></TR>
-  
-  
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><I><B>subscribable_ptr</B></I></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><I><B>OneToOneField (content_id)</B></I></FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><I>genres</I></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><I>CharField</I></FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><I>imdb_id</I></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><I>PositiveIntegerField</I></FONT>
     </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">is_airing</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">BooleanField</FONT>
-    </TD></TR>
-  
-  
-  
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><I>poster_url</I></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><I>URLField</I></FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><I>preview_poster_url</I></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><I>URLField</I></FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><I>runtime</I></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><I>DurationField</I></FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto">seasons</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">PositiveSmallIntegerField</FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><I>title</I></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><I>CharField</I></FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><I>year</I></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><I>CharField</I></FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto">years</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">CharField</FONT>
     </TD></TR>
-  
-  
+
+
     </TABLE>
     >]
 
@@ -268,71 +258,71 @@ digraph model_graph {
     <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
     Movie
     </B></FONT></TD></TR>
-  
-  
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><I><B>subscribable_ptr</B></I></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><I><B>OneToOneField (content_id)</B></I></FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><I>genres</I></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><I>CharField</I></FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><I>imdb_id</I></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><I>PositiveIntegerField</I></FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><I>poster_url</I></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><I>URLField</I></FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><I>preview_poster_url</I></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><I>URLField</I></FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><I>runtime</I></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><I>DurationField</I></FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><I>title</I></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><I>CharField</I></FONT>
     </TD></TR>
-  
-  
-  
+
+
+
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><I>year</I></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><I>CharField</I></FONT>
     </TD></TR>
-  
-  
+
+
     </TABLE>
     >]
 

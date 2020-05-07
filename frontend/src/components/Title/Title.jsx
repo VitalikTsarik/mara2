@@ -1,10 +1,8 @@
 import React, { useCallback, useState } from 'react';
-import classNames from 'classnames';
 
 import styles from './Title.scss';
 
 import { SubButton } from '../common/SubButton/SubButton';
-import Tooltip from '../common/Tooltip/Tooltip';
 import Placeholder from '../skeletons/Placeholder/Placeholder';
 import Info from '../common/Info/Info';
 
@@ -19,7 +17,6 @@ const Title = ({
                            genres,
                            year,
                            years,
-                           is_airing,
                            is_subscribed,
                        }
                }) => {
@@ -55,15 +52,6 @@ const Title = ({
             <div className={styles.overview}>
                 <div className={styles.title}>
                     {title} ({year})
-                    {is_airing !== undefined && (
-                        <Tooltip content={'Airing Status'}>
-                            <div className={classNames(
-                                styles.circle,
-                                is_airing && styles.circle__active,
-                            )}
-                            />
-                        </Tooltip>
-                    )}
                 </div>
                 <div className={styles.info}>
                     <Info
