@@ -1,8 +1,8 @@
 from huey import crontab
 from huey.contrib.djhuey import task, db_periodic_task
 
-from subscriptions.helpers.mail import send_subscriptions_update
-from .models import Subscription
+from ..helpers.mail import send_subscriptions_update
+from ..models import Subscription
 
 
 def subscriptions_check(user):
@@ -10,14 +10,17 @@ def subscriptions_check(user):
 
     items = []
     for subscription in subscriptions:
-        items.append(subscription.content.get_real_instance())
+        if subscription.updated:
+            items.append(subscription.content.get_real_instance())
+        subscription.updated = False
+        subscription.save()
 
     if len(items):
         send_subscriptions_update(user.email, user.username, items)
 
 
 @task()
-def schedule_subscriptions_check(user, minutes='*/1', hours='*'):
+def schedule_subscriptions_check(user, minutes='0', hours='12'):
     def wrapper():
         subscriptions_check(user)
 
