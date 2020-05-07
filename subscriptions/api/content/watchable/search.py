@@ -17,11 +17,10 @@ class SearchView(APIView):
         titles = []
         for item in result:
             try:
-                watchable = Movie.titles.get(imdb_id=item.imdb_id)
+                item = Movie.titles.get(imdb_id=item.imdb_id)
             except Watchable.DoesNotExist:
                 item.save()
-                watchable = Movie.titles.get(imdb_id=item.imdb_id)
-            titles.append(watchable)
+            titles.append(item)
 
         serializer = TitleSearchSerializer(titles, many=True)
         return Response(serializer.data)
