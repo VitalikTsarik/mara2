@@ -1,11 +1,15 @@
+import logging
+
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.status import HTTP_200_OK
+from rest_framework.status import HTTP_200_OK, HTTP_500_INTERNAL_SERVER_ERROR
 
 from subscriptions.models import Subscription, Movie
 from subscriptions.serializers import SubscriptionsSerializer, TitleSerializer
+
+logger = logging.getLogger(__name__)
 
 
 class SubscriptionsViewSet(ModelViewSet):
@@ -31,13 +35,20 @@ class SubscribeView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, content_id=None, *args, **kwargs):
-        self.subscribe_unsubscribe(content_id)
+        subscription = Subscription(user=self.request.user, content_id=content_id)
+        subscription.save()
         return Response(status=HTTP_200_OK)
 
-    def subscribe_unsubscribe(self, content_id):
+
+class UnsubscribeView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, content_id=None, *args, **kwargs):
         try:
             subscription = Subscription.objects.get(user=self.request.user, content_id=content_id)
             subscription.delete()
         except Subscription.DoesNotExist:
-            subscription = Subscription(user=self.request.user, content_id=content_id)
-            subscription.save()
+            logger.warning(
+                f'Trying to delete nonexistent subscription. User id: {request.user.id}, Content id: {content_id}')
+            Response(status=HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(status=HTTP_200_OK)

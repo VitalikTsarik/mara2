@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 import styles from './SubButton.scss';
 
-import { subscribe } from '../../../actions/subscriptions';
+import { subscribe, unsubscribe } from '../../../actions/subscriptions';
 import { useAuth } from '../../../context/auth/AuthContext';
 import { RouterUrls } from '../urls';
 
@@ -39,7 +39,11 @@ const SubButton = ({
         setIsLoading(true);
 
         try {
-            await subscribe(contentId);
+            if (isSub) {
+                await unsubscribe(contentId);
+            } else {
+                await subscribe(contentId);
+            }
             setIsSuccess(true);
             setIsSub((prev) => !prev);
             onSubCallback && onSubCallback();
@@ -48,7 +52,7 @@ const SubButton = ({
         } finally {
             setTimeout(() => setIsLoading(false), 5000);
         }
-    }, [onSubCallback, isLoading]);
+    }, [onSubCallback, isLoading, isSub]);
 
     return (
         <div className={styles.subButton}>
