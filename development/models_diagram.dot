@@ -111,14 +111,6 @@ digraph model_graph {
     </TD></TR>
 
 
-
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><I><B>polymorphic_ctype</B></I></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><I><B>ForeignKey (id)</B></I></FONT>
-    </TD></TR>
-
-
     </TABLE>
     >]
 
